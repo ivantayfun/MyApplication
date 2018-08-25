@@ -57,7 +57,6 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
         dbname_name_arr = new ArrayList<>();
         dbname_name_otobrajenie_arr = new ArrayList<>();
         dbname_checked_arr = new ArrayList<>();
-        //dbname_checked_arr = new boolean[20];
         slovary_activity_lnlname = (LinearLayout) findViewById(R.id.slovary_activity_lnlname);
         sozdlistslovarb ();
 
