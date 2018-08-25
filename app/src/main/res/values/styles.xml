@@ -1,0 +1,41 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground">@color/color2</item>
+        <item name="android:textColorPrimary">@color/color1</item>
+        <item name="android:textColorSecondary">@color/color5</item>
+        <item name="android:textColorTertiary">@color/color5</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="AppTheme2" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="PreferencesTheme" parent="@android:style/Theme.Black">
+        <item name="android:textColorPrimary">@color/color2</item>
+        <item name="android:textColorSecondary">@color/color3</item>
+        <item name="android:textColorTertiary">@color/color5</item>
+        <item name="android:windowBackground">@color/color5</item>
+        <item name="android:textColor">@color/color5</item>
+    </style>
+    <style name="textStyle" parent="@android:style/Theme.Black">
+        <item name="android:textColor">@color/color6</item>
+    </style>
+    <style name="layout" parent="@android:style/Theme">
+
+
+
+
+        <item name="android:windowBackground">@color/color2</item>
+        <item name="android:textColor">@color/color1</item>
+        <item name="android:textColorPrimary">@color/color5</item>
+        <item name="android:textColorSecondary">@color/color6</item>
+        <item name="android:textColorTertiary">@color/color5</item>
+        <item name="android:titleTextStyle">@style/textStyle</item>
+
+
+
+</style>
+    android:summary="Description of list"
+    android:title="List">
+</resources>

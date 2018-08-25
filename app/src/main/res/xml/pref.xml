@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:entries="@array/otvetu"
+        android:entryValues="@array/otvetu_values"
+        android:key="otvetu"
+        android:summary="@string/otvetu_opicanie"
+        android:title="@string/otvetu">
+    </ListPreference>
+    <ListPreference
+        android:entries="@array/variantu"
+        android:entryValues="@array/variantu_values"
+        android:key="variantu"
+        android:summary="@string/variantu_opicanie"
+        android:title="@string/variantu">
+    </ListPreference>
+    <ListPreference
+        android:entries="@array/pref_locale_language"
+        android:entryValues="@array/pref_locale_language_values"
+        android:key="pref_language"
+        android:summary="@string/language_opicanie"
+        android:title="@string/language">
+    </ListPreference>
+</PreferenceScreen>

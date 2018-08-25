@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/slovari_item"
+    android:layout_width="wrap_content"
+    android:layout_height="50dp"
+    android:layout_marginTop="5dp"
+    android:clickable="true"
+    android:orientation="horizontal"
+    android:textColor="@color/color5"
+    android:background="@color/color1">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/licheck"
+        android:orientation="horizontal"
+        android:gravity="left"
+        >
+
+        <TextView
+            android:id="@+id/text_slovary_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:clickable="false"
+            android:gravity="left|center"
+            android:selectAllOnFocus="false"
+            android:text="@string/my_text1"
+            android:textColor="@color/color5"
+            android:textSize="30dp">
+
+
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/licheck"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkBox_slovary_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:buttonTint="@color/color5"
+            android:shadowColor="@color/color5"
+            android:textColor="@color/color5"
+            android:textColorLink="@color/color3" />
+    </LinearLayout>
+
+</RelativeLayout>

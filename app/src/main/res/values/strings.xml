@@ -1,0 +1,122 @@
+<resources>
+    <string name="app_name">LONDON BERLIN</string>
+    <string name="title_activity_pref">PrefActivity</string>
+    <string name="my_text1">TEXT1</string>
+    <string name="my_text2">TEXT2</string>
+    <string name="my_text3">TEXT2</string>
+    <string name="steretb">стереть</string>
+    <string name="otvetitb">ответить</string>
+    <string name="vbIy4eno">Выучено</string>
+    <string name="vsego_slov">Всего Word</string>
+    <string name="dalshe">дальше</string>
+    <string name="my_button">BUTTON</string>
+    <string name="ychitbcnachala">Учить сначала</string>
+    <string name="ydalitb_slovarb">Удалить словарь</string>
+    <string name="dialog_ydalitb_slovarb">Вы уверены что хотите удалить выбранные словари</string>
+    <string name="dialog_zagryzitb_slovarb">Загрузить выбранные словари</string>
+    <string name="nastroiki">Настройки</string>
+    <string name="slovari">Словари</string>
+    <string name="gramatika">Граматика</string>
+    <string name="proiznoshenie">Произношение</string>
+    <string name="londonberlin">Download словарь</string>
+    <string name="skachatb_vbIbrannbIe">Скачать выбранные</string>
+    <string name="title_activity_activiti_slovarb">ActivitiSlovarb</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="exit">Словарь закончился</string>
+    <string name="exit_ychitb_c_nachala">Вы уверены что хотите учить словарь с начала</string>
+    <string name="save_data">Выберите следуещее действие</string>
+    <string name="ychitb_zanovo">Учить заново</string>
+    <string name="internet">Загрузк невозможна проверте интернет соиденение</string>
+    <string name="ok">Ok</string>
+    <string name="cencel">Отмена</string>
+    <string name="vubratb_drygoi_slovarb">Выбрать другой словарь</string>
+    <string name="title_activity_activiti_nastroiki">ActivitiNastroiki</string>
+    <string name="otvetu">Ответы</string>
+    <string name="otvetu_opicanie">Количество правильных ответов</string>
+    <string name="zagryzka_spiska_slovarey">zagryzka_spiska_slovarey</string>
+    <string name="zagryzka_slovarya_v_bazy">zagryzka_slovarya_v_bazy</string>
+    <string name="del_slovar">del</string>
+    <string-array name="otvetu">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    <string-array name="otvetu_values">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    <string name="variantu">Варианты</string>
+    <string name="language">Language</string>
+    <string name="variantu_opicanie">Количество вариантов ответов</string>
+    <string name="language_opicanie">Выберите язык</string>
+    <string-array name="variantu">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    <string-array name="variantu_values">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    <string-array name="pref_locale_language">
+        <item>English</item>
+        <item>Русский</item>
+        <item>Украінська</item>
+    </string-array>
+    <string-array name="pref_locale_language_values">
+        <item>en</item>
+        <item >ru</item>
+        <item>uk</item>
+
+    </string-array>
+    <string name="title_activity_gramatika">GramatikaActivity</string>
+    <string name="title_activity_gramatika_main">GramatikaMainActivity</string>
+    <string name="title_activity_proiznoshenie">ProiznoshenieActivity</string>
+    <string name="title_activity_londonberlin">LondonBerlinActivity</string>
+    <string name="textrussian_gramatikamain_item">russian</string>
+    <string name="textenglish_gramatikamain_item">english</string>
+<string name="string_proiznoshenie"> <b>I тип чтения – открытый слог (открытым считается слог, оканчивающийся на гласную, даже если она не произносится)
+
+        Обратите внимание на первую строку таблицы. Слова same, note, he, fine, my, cube как и все слова этой категории оканчиваются на немую гласную, а чтение гласных в корне слова совпадает с названием букв согласно алфавиту. Таким образом, слова с немыми гласными на конце, т.е. слова 1 типа чтения same, note, he, fine, my, cube, будут звучать как «сейм, ноут, хи, файн, май, кьюб»
+
+        Закрепим чтение гласных в ударном слоге  следующим упражнением:
+
+        Note, lone, mice, rice, type, tune, shy, lay, say, he, hay, name, same, nine, nice, game, came, make, Kate, Pete, five, tie, life, eve, me, size, no, cope, smoke, rose, nose, spine, sly, cry, vine, maze, home, tube, made, fume, cube, pace, lace, sky, hale, spine.
+
+        </b>\n <b> II тип чтения – закрытый слог  (закрытым считается слог, оканчивающийся на согласную). Это вторая строка по таблице. Обратите внимание на слова rat, hot, red, bit, myth, run,  на конце которых отсутствует немая гласная. Эти слова звучат как «рэт, хот, ред, бит, мисс, ран».
+
+        Cap, pen, bed, ten, not, spot, lot, bad, rat, sit, send, test, pit, in, send, spell, tin, less, ban, mad, fat, Sam, land, did, fit, sat, pet, tin, slip, sad, glad, bag, jam, gap, lag, can, kin, Jim, Jack, yes, ink, cup, run, cod, spin, not, doll, hop, hot, bank, rank, spin, up, us, bus, bun, cut, fun, vet, well, but, nut.
+
+       </b> \n <b>III тип чтения – гласная + буква “r”, которая влияет на звучание гласной в корне слова, придавая ей некоторую протяжность. Так слова car, sort, term, fir, Byrd, fur звучат как «ка: со:т, те:м, фё: бе:д, фе: ».
+
+        stern , Far, curt, hard, hart, car, card, cart, fork, cork, work,  sort, term, first,  Byrd, furs, curl,  her, curb, turn, girl, sir, burn, turn, word, born, torn, bird, form, serf, herb.
+
+        </b>\n <b>IV тип чтения – гласная + буква “r”+ гласная. Буква  “r” в данном случае также не читается;  все три гласные в совокупности звучат следующим образом: care, store, mere, tyre, cure – «кэа, сто:, миэ, таиэ, кьюэ».
+
+        Fare , here, pure, rare , cure, during, mare,   fire, bare, mire, stare ,tire,  sere,    mere, store,  core, more, care.
+</b>
+</string>
+</resources>

@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.ivan.myapplication.GramatikaActivity">
+    <item
+        android:icon="@drawable/nastroiki"
+        android:id="@+id/nastroiki"
+        android:orderInCategory="2"
+        android:title="@string/nastroiki" />
+    <item
+        android:icon="@drawable/slovari"
+        android:id="@+id/slovari"
+        android:orderInCategory="3"
+        android:title="@string/slovari" />
+    <item
+        android:icon="@drawable/proiznoshenie"
+        android:id="@+id/proiznoshenie"
+        android:orderInCategory="5"
+        android:title="@string/proiznoshenie" />
+    <item
+        android:icon="@drawable/proiznoshenie"
+        android:id="@+id/londonberlin"
+        android:orderInCategory="6"
+        android:title="@string/londonberlin" />
+</menu>

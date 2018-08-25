@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.ivan.myapplication.GramatikaMainActivity">
+
+    <TextView
+        android:id="@+id/textrussian_gramatikamain_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:selectAllOnFocus="false"
+        android:text="@string/textrussian_gramatikamain_item"
+        android:textSize="23dp">
+    </TextView>
+
+    <TextView
+        android:id="@+id/textenglish_gramatikamain_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:selectAllOnFocus="false"
+        android:textSize="23dp">
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="40"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:id="@+id/scroll_gramatikamain_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/gramatikamain_activity_lnlname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:clickable="false"
+                    android:orientation="vertical">
+                </LinearLayout>
+
+
+            </ScrollView>
+            <TextView
+                android:id="@+id/textenglish_pravelbnblu_otvet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:selectAllOnFocus="false"
+                android:textSize="23dp"
+                android:layout_gravity="bottom">
+            </TextView>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_steretb"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="@string/steretb"
+                android:layout_gravity="left|bottom">
+            </Button>
+
+            <Button
+                android:id="@+id/button_otvetitb"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:clickable="true"
+                android:text="@string/otvetitb">
+            </Button>
+
+            <Button
+                android:id="@+id/button_dalshe"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="@string/dalshe"
+                android:layout_gravity="bottom|right">
+            </Button>
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

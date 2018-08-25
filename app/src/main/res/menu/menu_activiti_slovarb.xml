@@ -1,0 +1,35 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+tools:context=".ActivitiSlovarb">
+    <item
+        android:icon="@drawable/nastroiki"
+        android:id="@+id/nastroiki"
+        android:orderInCategory="2"
+        android:title="@string/nastroiki" />
+    <item
+        android:icon="@drawable/slovari"
+        android:id="@+id/slovari"
+        android:orderInCategory="3"
+        android:title="@string/slovari" />
+    <item
+        android:icon="@drawable/gramatika"
+        android:id="@+id/gramatika"
+        android:orderInCategory="4"
+        android:title="@string/gramatika" />
+    <item
+        android:icon="@drawable/proiznoshenie"
+        android:id="@+id/proiznoshenie"
+        android:orderInCategory="5"
+        android:title="@string/proiznoshenie" />
+    <item
+        android:icon="@drawable/proiznoshenie"
+        android:id="@+id/ydalitb_slovarb"
+        android:orderInCategory="1"
+        android:title="@string/ydalitb_slovarb" />
+<item
+    android:icon="@drawable/proiznoshenie"
+    android:id="@+id/londonberlin"
+    android:orderInCategory="6"
+    android:title="@string/londonberlin" />
+
+</menu>
