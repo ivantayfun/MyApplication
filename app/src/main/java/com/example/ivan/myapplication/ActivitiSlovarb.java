@@ -26,7 +26,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 
 import java.util.ArrayList;
-import java.util.*;
 
 public class ActivitiSlovarb extends AppCompatActivity implements OnClickListener {
     ExternalDbOpenHelper dbOpenHelper;
