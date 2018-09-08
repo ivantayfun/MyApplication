@@ -58,10 +58,10 @@ public class ActivitySlovarbList extends Activity implements OnClickListener {
         dbOpenHelper.close();
         texts =  dbname_name_otobrajenie_arr;
         checked = dbname_checked_arr;
-        ArrayList<Map<String, Object>> data = new ArrayList<Map<String, Object>>(texts.length);
+        ArrayList<Map<String, Object>> data = new ArrayList<>(texts.length);
         Map<String, Object> m;
         for (int k = 0; k < texts.length; k++) {
-            m = new HashMap<String, Object>();
+            m = new HashMap<>();
             m.put(ATTRIBUTE_NAME_TEXT, texts[k]);
             m.put(ATTRIBUTE_NAME_CHECKED, checked[k]);
             data.add(m);
@@ -69,7 +69,7 @@ public class ActivitySlovarbList extends Activity implements OnClickListener {
         String[] from = {ATTRIBUTE_NAME_TEXT, ATTRIBUTE_NAME_CHECKED};
         int[] to = {R.id.text_slovary_item, R.id.checkBox_slovary_item};
         simpleAdapter = new SimpleAdapter(this, data, R.layout.slovari_item, from, to);
-        lvSimple = (ListView) findViewById(R.id.lvSimple);
+        lvSimple =  findViewById(R.id.lvSimple);
         lvSimple.setAdapter(simpleAdapter);
     }
     @Override

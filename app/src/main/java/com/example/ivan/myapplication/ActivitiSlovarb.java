@@ -1,7 +1,7 @@
 package com.example.ivan.myapplication;
 
 
-import com.example.ivan.myapplication.R;
+//import com.example.ivan.myapplication.R;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -35,13 +35,13 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
     ArrayList<String> dbname_name_arr;
     ArrayList<String> dbname_name_otobrajenie_arr;
     ArrayList<Boolean> dbname_checked_arr;
-    int[] textview_arr_id;
-    int[] colors = new int[1];
+    //int[] textview_arr_id;
+    //int[] colors = new int[1];
     //boolean[] dbname_checked_arr;
     LinearLayout slovary_activity_lnlname;
     String namelessons;
     final int DIALOG_EXIT2 = 2;
-    private String TAG = MainActivity.class.getSimpleName();
+    //private String TAG = MainActivity.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +55,7 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
         dbname_name_arr = new ArrayList<>();
         dbname_name_otobrajenie_arr = new ArrayList<>();
         dbname_checked_arr = new ArrayList<>();
-        slovary_activity_lnlname = (LinearLayout) findViewById(R.id.slovary_activity_lnlname);
+        slovary_activity_lnlname = findViewById(R.id.slovary_activity_lnlname);
         sozdlistslovarb ();
 
     }
@@ -71,7 +71,7 @@ public  void sozdlistslovarb (){
             slovary_activity_lnlname.removeAllViews();
             if (c.moveToFirst()) {
                 int i = 0;
-                final int jjj = c.getCount();
+                //final int jjj = c.getCount();
                 do {
 
                     dbname_id_arr.add(c.getInt(c.getColumnIndex("_id")));
@@ -79,8 +79,8 @@ public  void sozdlistslovarb (){
                     dbname_name_otobrajenie_arr.add(c.getString(c.getColumnIndex("name_otobrajenie")));
                     dbname_checked_arr.add(false);
                     View item = ltInflayter_bdname.inflate(R.layout.slovari_item, slovary_activity_lnlname, false);
-                    TextView text_slovary_item = (TextView) item.findViewById(R.id.text_slovary_item);
-                    CheckBox checkBox_slovary_item = (CheckBox) item.findViewById(R.id.checkBox_slovary_item);
+                    TextView text_slovary_item =  item.findViewById(R.id.text_slovary_item);
+                    CheckBox checkBox_slovary_item = item.findViewById(R.id.checkBox_slovary_item);
                     text_slovary_item.setText(dbname_name_otobrajenie_arr.get(i));
                     item.getLayoutParams().width = LayoutParams.MATCH_PARENT;
                     text_slovary_item.setId(i);
@@ -129,7 +129,7 @@ public  void sozdlistslovarb (){
         sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor ed = sp.edit();
         ed.putString("TABLE_NAME_PARSER", fff);
-        ed.commit();
+        ed.apply();
         finish();
     }
 

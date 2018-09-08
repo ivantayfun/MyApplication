@@ -25,9 +25,9 @@ import android.view.ViewGroup.LayoutParams;
 import android.graphics.Color;
 import android.content.DialogInterface.OnClickListener;
 
-import android.content.Context;
+/*import android.content.Context;
 
-import java.util.Locale;
+import java.util.Locale;*/
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String[] transcription_arr;
     String[] selectionArgs2 = null;
     String[] dbname_name_arr;
-    String[] pref_locale;
+    //String[] pref_locale;
     int[] dbname_id_arr;
     SQLiteDatabase database;
     int[] id_vbaze;
@@ -84,12 +84,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean chereda;
     boolean dopic;
     String[] locale_lang_arr;
-    String lang1;
+    //String lang1;
     Resources res;
-    Context context;
-    locales locale;
-    Locale localeg;
-    Locale hhh;
+    //Context context;
+    //locales locale;
+    //Locale localeg;
+    //Locale hhh;
     ExternalDbOpenHelper dbOpenHelper;
     LinearLayout linLayout;
     OnClickListener myClickListener = new OnClickListener() {
@@ -132,11 +132,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         perv_zap = "perv_zap";
         TABLE_NAME_PARSER = "TABLE_NAME_PARSER";
         TAG = MainActivity.class.getSimpleName();
-        my_text = (TextView) findViewById(R.id.my_text);
-        my_text1 = (TextView) findViewById(R.id.my_text1);
-        my_text2 = (TextView) findViewById(R.id.my_text2);
-        col_slov = (TextView) findViewById(R.id.col_slov);
-        vuy4_slov = (TextView) findViewById(R.id.vuy4_slov);
+        my_text =  findViewById(R.id.my_text);
+        my_text1 =  findViewById(R.id.my_text1);
+        my_text2 =  findViewById(R.id.my_text2);
+        col_slov =  findViewById(R.id.col_slov);
+        vuy4_slov = findViewById(R.id.vuy4_slov);
         DB_NAME = "mydatabase.sqlite";
         dbOpenHelper = new ExternalDbOpenHelper(this, DB_NAME);
         na_random2 = 5;
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         colors[0] = Color.parseColor("#fffbfdff");
         colors[1] = Color.parseColor("#ffb8d8ff");
         //Создаем обьект для данных
-        linLayout = (LinearLayout) findViewById(R.id.linLayout);
+        linLayout =  findViewById(R.id.linLayout);
         english_arr = new String[100];
         russian_arr = new String[100];
         transcription_arr = new String[100];
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dbname_id_arr = new int[20];
         mark = new int[20];
         locale_lang_arr = new String[2];
-        Intent intent = getIntent();
+        //Intent intent = getIntent();
 
         //если приложение уже загружалось в преференснастройках perv_zap будет равно 0 а не NULL
         perv_zap_marker = loadText(perv_zap);
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void zagryzkavbazy() {
-        SQLiteDatabase database = dbOpenHelper.openDataBase();
+        //SQLiteDatabase database = dbOpenHelper.openDataBase();
         saveText(perv_zap, "0");
         saveText(TABLE_NAME_PARSER, "animals");
         saveText("otvetu", "6");
@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         Editor ed = sp.edit();
         ed.putString(nidname, nidname_text);
-        ed.commit();
+        ed.apply();
     }
 
     private String loadText(String nidname) {
@@ -206,9 +206,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void loadPars() {
-        kol_variantu = new Integer(loadText("variantu"));
-        kol_otvetu = new Integer(loadText("otvetu"));
-        pref_language = new String(loadText("pref_language"));
+        kol_variantu = Integer.valueOf(loadText("variantu"));
+        kol_otvetu = Integer.valueOf(loadText("otvetu"));
+        pref_language = loadText("pref_language");
         //СМЕНА ЯЗЫКА ПОКА ЗАМОРОЖЕНА НЕ УДАЛЯТЬ
         /*if (pref_language.equals(getResources().getConfiguration().locale.getLanguage())) {
 
@@ -284,18 +284,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //ЗАПУСК АКТИВИТИ СЛОВАРИ
-    private void slovarifynk2() {
-        Intent intent = new Intent(this, ActivitySlovarbList.class);
-        startActivity(intent);
-        finish();
-    }
+//    private void slovarifynk2() {
+//        Intent intent = new Intent(this, ActivitySlovarbList.class);
+//        startActivity(intent);
+//        finish();
+//    }
 
     //ЗАПУСК АКТИВИТИ ЛОНДОНБЕРЛИН
-    private void londonberlinfynk() {
+    /*private void londonberlinfynk() {
         Intent intent = new Intent(this, LondonBerlinActivity.class);
         startActivity(intent);
 
-    }
+    }*/
 
     //ЗАПУСК АКТИВИТИ ЛОНДОНБЕРЛИН
     private void londonberlinfynk2() {
@@ -362,11 +362,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //ФУНКЦИЯ ОБНУЛЕНИЯ ПРАВИЛЬНЫХ ОТВЕТОВ В СЛОВАРЕ
     private void ychitbcnachalafynk() {
         linLayout.removeAllViews();
-        SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
+        //SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("kolotv", "0");
         cv.put("vid", "0");
-        int clearCount = database.update(MY_TABLE, cv, null, null);
+        //int clearCount = database.update(MY_TABLE, cv, null, null);
         id_vbazezapicb = "";
         vgetid = "";
         MY_TABLE = loadText(TABLE_NAME_PARSER);
@@ -390,19 +390,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!cursor2.moveToFirst()) {
             dbOpenHelper.close();
             slovarifynk();
-
+            cursor2.close();
         } else {
-            if (id_vbazezapicb.equalsIgnoreCase("") & vgetid.equalsIgnoreCase("")) {
-            } else {
+            if (!(id_vbazezapicb.equalsIgnoreCase("") & vgetid.equalsIgnoreCase(""))) {
+
                 ContentValues cv = new ContentValues();
                 cv.put("kolotv", id_vbazezapicb);
                 cv.put("vid", flagydal);
 
-                int clearCount = database.update(MY_TABLE, cv, "_id = ?", new String[]{vgetid});
+                database.update(MY_TABLE, cv, "_id = ?", new String[]{vgetid});
             }
             Cursor cursor = database.query(MY_TABLE, null, null, null, null, null, null);
             int colslov = cursor.getCount();
-            col_slov.setText(res.getString(R.string.vsego_slov) + Integer.toString(colslov));
+            String concat = res.getString(R.string.vsego_slov) + Integer.toString(colslov);
+            col_slov.setText(concat);
             cursor.close();
             selectionArgs2 = new String[]{"0"};
             selection = "vid = ?";
@@ -411,9 +412,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Cursor c = database.query(MY_TABLE, null, selection, selectionArgs2, null, null, null);
             int vuy4slov = colslov - c.getCount();
 
-
-            vuy4_slov.setText(res.getString(R.string.vbIy4eno) + Integer.toString(vuy4slov));
-            if (c != null) if (c.getCount() > 0) {
+            String foconcat = res.getString(R.string.vbIy4eno) + Integer.toString(vuy4slov);
+            vuy4_slov.setText(foconcat);
+            if (c.getCount() > 0) {
                 chislo_spiska = 0;
                 if (c.moveToFirst()) {
                     int idColIndex = c.getColumnIndex("_id");
@@ -475,8 +476,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     } while (metka2 == 0);
                     View item = ltInflayter.inflate(R.layout.item, linLayout, false);
-                    TextView tvName = (TextView) item.findViewById(R.id.tvName);
-                    TextView tvName2 = (TextView) item.findViewById(R.id.tvName2);
+                    TextView tvName =  item.findViewById(R.id.tvName);
+                    TextView tvName2 = item.findViewById(R.id.tvName2);
                     if (chereda) {
                         if (k == my_rand) {
 
