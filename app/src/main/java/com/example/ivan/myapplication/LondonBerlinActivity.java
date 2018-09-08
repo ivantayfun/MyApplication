@@ -2,9 +2,9 @@ package com.example.ivan.myapplication;
 
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Context;
+//import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+//import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,20 +12,17 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
-
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+//import android.database.Cursor;
+//import android.database.sqlite.SQLiteDatabase;
+//import android.database.sqlite.SQLiteOpenHelper;
 
 //import com.example.myapplication.R;
 
@@ -34,8 +31,8 @@ public class LondonBerlinActivity extends Activity {
     private ListView lv;
     ArrayList<HashMap<String, String>> contactList;
     ExternalDbOpenHelper dbOpenHelper;                                                  //2
-    SQLiteDatabase db;
-    SQLiteDatabase db2;
+    //SQLiteDatabase db;
+    //SQLiteDatabase db2;
     //DBHelper dbh;
 
     @Override
@@ -44,7 +41,7 @@ public class LondonBerlinActivity extends Activity {
         setContentView(R.layout.londonberlin_activity_main);
 
         contactList = new ArrayList<>();
-        lv = (ListView) findViewById(R.id.londonberlin_list);
+        lv = findViewById(R.id.londonberlin_list);
 
         new GetContacts().execute();
         String DB_NAME;
@@ -106,8 +103,8 @@ public class LondonBerlinActivity extends Activity {
                             String english = c.getString("english");
                             String russian = c.getString("russian");
                             String transcription = c.getString("transcription");
-                            String kolotv = c.getString("kolotv");
-                            String vid = c.getString("vid");
+                            //String kolotv = c.getString("kolotv");
+                            //String vid = c.getString("vid");
 
                             ContentValues cv = new ContentValues();
 

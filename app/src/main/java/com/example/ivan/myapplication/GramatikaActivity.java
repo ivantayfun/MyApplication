@@ -4,14 +4,14 @@ package com.example.ivan.myapplication;
 //import com.example.myapplication.R;
 
 //import android.content.ContentValues;
-import android.app.Dialog;
+//import android.app.Dialog;
 import android.content.Intent;
 //import android.content.SharedPreferences;
 //import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+//import android.database.Cursor;
+//import android.database.sqlite.SQLiteDatabase;
+//import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -19,9 +19,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.app.Activity;
+//import android.app.Activity;
 import android.view.View;
-import android.view.Window;
+//import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
@@ -34,9 +34,9 @@ import android.view.ViewGroup.LayoutParams;
 //import java.util.Random;
 
 //import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+//import android.os.Bundle;
+//import android.view.Menu;
+//import android.view.MenuItem;
 
 
 public class GramatikaActivity extends AppCompatActivity implements OnClickListener {
@@ -57,7 +57,7 @@ public class GramatikaActivity extends AppCompatActivity implements OnClickListe
         colors[2] = Color.parseColor("#ffff8e8d");
         colors[3] = Color.parseColor("#fffdff95");
 
-        gramatika_activity_lnlname = (LinearLayout) findViewById(R.id.gramatika_activity_lnlname);
+        gramatika_activity_lnlname =  findViewById(R.id.gramatika_activity_lnlname);
 
 
             LayoutInflater ltInflayter_bdname = getLayoutInflater();
@@ -65,7 +65,7 @@ public class GramatikaActivity extends AppCompatActivity implements OnClickListe
 
         for (int i = 0; i < english_times.length; i++) {
             View item = ltInflayter_bdname.inflate(R.layout.gramatika_item, gramatika_activity_lnlname, false);
-            TextView text_slovary_item = (TextView) item.findViewById(R.id.text_gramatika_item);
+            TextView text_slovary_item =  item.findViewById(R.id.text_gramatika_item);
             text_slovary_item.setText(english_times[i]);
             item.getLayoutParams().width = LayoutParams.MATCH_PARENT;
             text_slovary_item.setId(i);
@@ -104,7 +104,7 @@ public class GramatikaActivity extends AppCompatActivity implements OnClickListe
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor ed = sp.edit();
         ed.putString(nidname, nidname_text);
-        ed.commit();
+        ed.apply();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

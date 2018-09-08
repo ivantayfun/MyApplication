@@ -32,7 +32,7 @@ import java.net.URL;
 public class ZagryzkaSpiskaSlovarey extends Activity {
     String jsonStr;
     public String flag;
-    String namelessons;
+    //String namelessons;
     int[] dbname_id_arr;
     String[] name_lesson_arr;
     String[] name_lesson_otobr_arr;
@@ -95,7 +95,7 @@ public class ZagryzkaSpiskaSlovarey extends Activity {
             StringBuilder content = new StringBuilder();
             try {
 
-                int c;
+                //int c;
                 Log.d(TAG, "Подключ " );
                 URL myUrl = new URL("http://annarybakova.net/android");
                 HttpURLConnection ddd = (HttpURLConnection)myUrl.openConnection();

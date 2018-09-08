@@ -4,19 +4,17 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
-
 import java.util.Locale;
 
 public class locales extends Application {
-    private SharedPreferences preferences;
     private Locale locale;
-    private String lang;
+
     @Override
     public void onCreate() {
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        lang=preferences.getString("lang","ru");
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String lang = preferences.getString("lang", "ru");
         if (lang.equals("default")){
-            lang=getResources().getConfiguration().locale.getCountry();
+            lang =getResources().getConfiguration().locale.getCountry();
 
         }
 

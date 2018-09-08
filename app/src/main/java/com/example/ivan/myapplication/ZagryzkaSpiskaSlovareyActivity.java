@@ -1,6 +1,6 @@
 package com.example.ivan.myapplication;
 
-import android.app.Activity;
+//import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
@@ -45,12 +45,13 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
     String namelessons_otobr;
     final int DIALOG_EXIT2 = 2;
     String [] args;
-    String jsonStr;
+    private String jsonStr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activiti_slovarb);
         Intent intent = getIntent();
+        jsonStr = "";
         dbname_checked_arr = new boolean[20];
         dbOpenHelper = new ExternalDbOpenHelper(this, "mydatabase.sqlite");
         name_lesson_arr = intent.getStringArrayExtra("name_lesson_arr");
@@ -62,14 +63,14 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
         args[0]="POST";
         args[1]="namelessons";
 
-        slovary_activity_lnlname = (LinearLayout) findViewById(R.id.slovary_activity_lnlname);
+        slovary_activity_lnlname =  findViewById(R.id.slovary_activity_lnlname);
         LayoutInflater ltInflayter_bdname = getLayoutInflater();
         slovary_activity_lnlname.removeAllViews();
         for ( int i = 0; i < name_lesson_arr.length; i++) {
             if (name_lesson_arr[i] != null) {
                 View item = ltInflayter_bdname.inflate(R.layout.zagryzkaspiskaslovarey_item, slovary_activity_lnlname, false);
-                TextView text_slovary_item = (TextView) item.findViewById(R.id.text_zagryzkaspiskaslovarey_item);
-                CheckBox checkBox_slovary_item = (CheckBox) item.findViewById(R.id.checkBox_zagryzkaspiskaslovarey_item);
+                TextView text_slovary_item = item.findViewById(R.id.text_zagryzkaspiskaslovarey_item);
+                CheckBox checkBox_slovary_item = item.findViewById(R.id.checkBox_zagryzkaspiskaslovarey_item);
                 text_slovary_item.setText(name_lesson_otobr_arr[i]);
                 item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
                 text_slovary_item.setId(i);
@@ -120,7 +121,7 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
                     //(name_lesson_arr[k],Integer.toString(name_lesson_id_arr[k]));
 
 
-                    if (jsonStr != null) {
+                    if (!jsonStr.equals("")) {
 
                         SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
 

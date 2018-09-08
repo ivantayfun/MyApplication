@@ -27,7 +27,7 @@ import android.content.DialogInterface.OnClickListener;
 
 /*import android.content.Context;
 
-import java.util.Locale;*/
+//import java.util.Locale;*/
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String[] dbname_name_arr;
     //String[] pref_locale;
     int[] dbname_id_arr;
-    SQLiteDatabase database;
+    //SQLiteDatabase database;
     int[] id_vbaze;
     int[] kolotv_arr;
     int[] vid_arr;
@@ -509,11 +509,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 vgetid = Integer.toString(id_vbaze[v.getId()]);
                                 kolotv_arr[v.getId()] = kolotv_arr[v.getId()] + 1;
                                 id_vbazezapicb = Integer.toString(kolotv_arr[v.getId()]);
-                                if (chereda) {
-                                    chereda = false;
-                                } else {
-                                    chereda = true;
-                                }
+                                chereda = !chereda;
                                 if (kolotv_arr[v.getId()] < kol_otvetu) {
                                     flagydal = "0";
                                 } else {

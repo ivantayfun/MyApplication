@@ -1,30 +1,13 @@
 package com.example.ivan.myapplication;
-import android.app.Application;
-import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
 
+import android.app.Activity;
+import android.util.Log;
 import java.net.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import com.example.ivan.myapplication.ZagryzkaSpiskaSlovarey;
-public class URLConnectionExample extends Application{
-
-
-
-
+public class URLConnectionExample extends Activity{
     public static String main(String [] args)  {
-
-
-
-
-
         StringBuilder content = new StringBuilder();
         try {
-
-            int c;
             URL myUrl = new URL("http://annarybakova.net/android");
             HttpURLConnection ddd = (HttpURLConnection)myUrl.openConnection();
             ddd.setRequestMethod(args[0]);
@@ -49,12 +32,10 @@ public class URLConnectionExample extends Application{
             }
             bufferedReader.close();
         } catch (IOException e){
-            String TAG = AndroidActivity.class.getSimpleName();
+            String TAG = URLConnectionExample.class.getSimpleName();
             Log.e(TAG, "Json parsing error1: " + e.getMessage());
                         e.printStackTrace();
-
         }
         return content.toString();
     }
-
 }

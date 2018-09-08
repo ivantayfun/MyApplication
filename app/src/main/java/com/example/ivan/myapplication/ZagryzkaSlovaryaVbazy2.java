@@ -1,13 +1,13 @@
 package com.example.ivan.myapplication;
 
-import android.app.Activity;
+//import android.app.Activity;
 import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
+//import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
-import android.os.Bundle;
+//import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,7 +24,7 @@ public class ZagryzkaSlovaryaVbazy2 extends Application {
     //String namelessons_id_string;
     //int[] dbname_id_arr;
     Context context;
-    String[] name_lesson_arr;
+    //String[] name_lesson_arr;
     //String[] dbname_name_otobrajenie_arr;
     String [] args;
     public ZagryzkaSlovaryaVbazy2(Context context, String name_lesson, String name_lesson_id){

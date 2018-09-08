@@ -1,19 +1,13 @@
-
-
-
 package com.example.ivan.myapplication;
 
 //import org.json.simple.JSONObject;
-
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.URI;
+//import java.net.URI;
 import java.net.URL;
 
 public class MainActivity2Activity {
-
-    public static String enc;
 
     public static void main(String[] args) throws Exception {
 
@@ -60,11 +54,11 @@ public class MainActivity2Activity {
 
 
             String str = new String(chars);
-            enc = new String(str.getBytes("ISO-8859-1"), "utf-8");
+            String enc = new String(str.getBytes("ISO-8859-1"), "utf-8");
             System.out.print(enc);
 
             //JSONObject ddv = optJSONObject (String name)
-            URI uri = new URI("http://adminka/android");
+            //URI uri = new URI("http://adminka/android");
             //JSONTokener tokener = new JSONTokener(uri.toURL().openStream());
             //JSONObject root = new JSONObject(tokener);
             //JSONObject vvv = new JSONObject();

@@ -12,38 +12,38 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.ContentValues;
-import android.content.DialogInterface;
-import android.content.Intent;
+//import android.app.AlertDialog;
+//import android.app.Dialog;
+//import android.content.ContentValues;
+//import android.content.DialogInterface;
+//import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Bundle;
+//import android.database.sqlite.SQLiteOpenHelper;
+//import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
+//import android.view.Menu;
+//import android.view.MenuItem;
 import android.app.Activity;
 import android.view.View;
-import android.view.Window;
+//import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 //import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.graphics.Color;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
+//import android.app.Activity;
+//import android.app.AlertDialog;
+//import android.app.Dialog;
+//import android.content.DialogInterface;
+//import android.content.DialogInterface.OnClickListener;
+//import android.os.Bundle;
+//import android.view.View;
+//import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -60,9 +60,9 @@ public class GramatikaMainActivity extends Activity implements View.OnClickListe
     String Parser_DATA;
     String GRAMATIKA_ENGLISH_TIME;
     String GRAMATIKA_TIME_VBAZE;
-    ArrayList<String> english_text_otobrajenie = new ArrayList<String>();
-    ArrayList<String> english_ArrayList = new ArrayList<String>();
-    ArrayList<String> russian_ArrayList = new ArrayList<String>();
+    ArrayList<String> english_text_otobrajenie = new ArrayList<>();
+    ArrayList<String> english_ArrayList = new ArrayList<>();
+    ArrayList<String> russian_ArrayList = new ArrayList<>();
     SharedPreferences sp;
     String tmp;
     String tmp2;
@@ -90,9 +90,9 @@ public class GramatikaMainActivity extends Activity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gramatika_main);
-        btn_steretb = (Button) findViewById(R.id.button_steretb);
-        btn_otvetitb = (Button) findViewById(R.id.button_otvetitb);
-        btn_dalshe = (Button) findViewById(R.id.button_dalshe);
+        btn_steretb = findViewById(R.id.button_steretb);
+        btn_otvetitb = findViewById(R.id.button_otvetitb);
+        btn_dalshe = findViewById(R.id.button_dalshe);
         btn_steretb.setOnClickListener(this);
         btn_otvetitb.setOnClickListener(this);
         btn_dalshe.setOnClickListener(this);
@@ -110,11 +110,11 @@ public class GramatikaMainActivity extends Activity implements View.OnClickListe
         tmp_otobrajenie = "";
         english_predlogenie = "";
         colors[0] = Color.parseColor("#ff9d9aff");
-        text_russian = (TextView) findViewById(R.id.textrussian_gramatikamain_item);
-        text_english = (TextView) findViewById(R.id.textenglish_gramatikamain_item);
-        textenglish_pravelbnblu_otvet = (TextView) findViewById(R.id.textenglish_pravelbnblu_otvet);
+        text_russian = findViewById(R.id.textrussian_gramatikamain_item);
+        text_english = findViewById(R.id.textenglish_gramatikamain_item);
+        textenglish_pravelbnblu_otvet = findViewById(R.id.textenglish_pravelbnblu_otvet);
         //Создаем обьект для данных
-        linLayout = (LinearLayout) findViewById(R.id.gramatikamain_activity_lnlname);
+        linLayout = findViewById(R.id.gramatikamain_activity_lnlname);
         perv_zap_marker = loadText(perv_zap);
         if (perv_zap_marker.equals("")) {
             zagryzkavbazy();
@@ -133,7 +133,7 @@ public class GramatikaMainActivity extends Activity implements View.OnClickListe
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         Editor ed = sp.edit();
         ed.putString(nidname, nidname_text);
-        ed.commit();
+        ed.apply();
     }
     public String loadText(String nidname) {
         sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -163,8 +163,10 @@ public class GramatikaMainActivity extends Activity implements View.OnClickListe
                     }
                 } while (c.moveToNext());
             }
-            text_russian.setText("gramatika_time_funk");
+            String dlyseta = "gramatika_time_funk";
+            text_russian.setText(dlyseta);
             sled_predloj_funk();
+            c.close();
         } else text_russian.setText("Нет данных");
         dbOpenHelper.close();
 
@@ -202,9 +204,7 @@ public class GramatikaMainActivity extends Activity implements View.OnClickListe
                 xpp.next();
             }
 
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (XmlPullParserException | IOException e) {
             e.printStackTrace();
         }
         for (int w = 0; w < kol_slov; w++) {
@@ -240,15 +240,15 @@ public class GramatikaMainActivity extends Activity implements View.OnClickListe
     }
     public void sled_slovo_funk(){
         text_russian.setText(russian_ArrayList.get(id_predlojeniu));
-        gramatikamain_activity_lnlname = (LinearLayout) findViewById(R.id.gramatikamain_activity_lnlname);
+        gramatikamain_activity_lnlname =  findViewById(R.id.gramatikamain_activity_lnlname);
         gramatikamain_activity_lnlname.removeAllViews();
         LayoutInflater ltInflayter_bdname = getLayoutInflater();
 
 
         for (int i = 0; i < kol_slov; i++) {
-            double ostatok = Math.IEEEremainder(i, 2);
+            //double ostatok = Math.IEEEremainder(i, 2);
             View item = ltInflayter_bdname.inflate(R.layout.gramatikamain_item, gramatikamain_activity_lnlname, false);
-            TextView text_slovary_item = (TextView) item.findViewById(R.id.text_gramatikamain_item);
+            TextView text_slovary_item = item.findViewById(R.id.text_gramatikamain_item);
             text_slovary_item.setText(tmp_otobrajenie_arr[mark[i]]);
             item.getLayoutParams().width = LayoutParams.MATCH_PARENT;
             text_slovary_item.setId(mark[i]);
@@ -308,16 +308,16 @@ public class GramatikaMainActivity extends Activity implements View.OnClickListe
             case R.id.button_otvetitb:
                 if (english_ArrayList.size() >0) {
                     if (id_predlojeniu < english_ArrayList.size()) {
-                        if (english_predlogenie.equals(text_english.getText())) {
+                        if (english_predlogenie.equals(text_english.getText().toString())) {
                             text_russian.setText("Отлично");
                             gramatikamain_activity_lnlname.removeAllViews();
                             text_english.setText("");
                             english_text_otobrajenie.clear();
                             textenglish_pravelbnblu_otvet.setText("");
                             id_eshe_ne_otvetil = true;
-                        } else if (text_english.getText().equals("")) {
+                        } else if (!text_english.getText().equals("")) {
 
-                        } else {
+
                             text_russian.setText("Неправильно.");
                             gramatikamain_activity_lnlname.removeAllViews();
                             text_english.setText("Правильный ответ:");

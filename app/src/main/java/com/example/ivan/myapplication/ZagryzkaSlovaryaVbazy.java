@@ -19,7 +19,7 @@ public class ZagryzkaSlovaryaVbazy extends Activity {
     String jsonStr;
     String namelessons;
     String namelessons_id;
-    String namelessons_id_string;
+    //String namelessons_id_string;
     int[] dbname_id_arr;
     String[] name_lesson_arr;
     String[] dbname_name_otobrajenie_arr;

@@ -48,10 +48,6 @@
             android:label="@string/title_activity_londonberlin" >
         </activity>
         <activity
-            android:name=".AndroidActivity"
-            android:label="@string/title_activity_londonberlin" >
-        </activity>
-        <activity
             android:name=".ZagryzkaSpiskaSlovareyActivity"
             android:label="@string/title_activity_londonberlin" >
         </activity>
@@ -63,10 +59,7 @@
             android:name=".ZagryzkaSlovaryaVbazy"
             android:label="@string/title_activity_londonberlin" >
         </activity>
-        <activity
-            android:name=".ActivitySlovarbList"
-            android:label="@string/title_activity_londonberlin" >
-        </activity>
+        <activity android:name=".URLConnectionExample"/>
 
     </application>
 
