@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="30dp"
     android:clickable="true"
-    android:layout_marginTop="5dp">
+    android:layout_marginTop="5dp"
+    android:focusable="true">
 
     <TextView
         android:id="@+id/text_gramatika_item"
@@ -13,12 +14,9 @@
         android:layout_height="match_parent"
         android:text="@string/my_text1"
         android:clickable="false"
-        android:textSize="13dp"
-        android:gravity="left|center"
+        android:textSize="13sp"
+        android:gravity="start|center"
         android:selectAllOnFocus="false"
-        android:layout_marginRight="5dp">
-
-
-    </TextView>
+        android:layout_marginEnd="5dp"/>
 
 </LinearLayout>

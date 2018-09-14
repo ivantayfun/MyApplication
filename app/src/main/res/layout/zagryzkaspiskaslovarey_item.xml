@@ -7,37 +7,35 @@
     android:clickable="true"
     android:orientation="horizontal"
     android:textColor="@color/color5"
-    android:background="@color/color1">
+    android:background="@color/color1"
+    android:focusable="true">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_toLeftOf="@+id/zagryzkaspiskaslovarey_licheck"
+        android:layout_toStartOf="@+id/zagryzkaspiskaslovarey_licheck"
         android:orientation="horizontal"
-        android:gravity="left"
+        android:gravity="start"
         >
 
         <TextView
             android:id="@+id/text_zagryzkaspiskaslovarey_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:clickable="false"
-            android:gravity="left|center"
+            android:gravity="start|center"
             android:selectAllOnFocus="false"
             android:text="@string/my_text1"
             android:textColor="@color/color5"
-            android:textSize="30dp">
-
-
-        </TextView>
+            android:textSize="30sp"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/zagryzkaspiskaslovarey_licheck"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:orientation="horizontal">
 
         <CheckBox
@@ -45,7 +43,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:buttonTint="@color/color5"
             android:shadowColor="@color/color5"
             android:textColor="@color/color5"
             android:textColorLink="@color/color3" />

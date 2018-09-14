@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tutorialspoint7.myapplication.MainActivity">
+    tools:context="com.example.ivan.myapplication.MainActivity">
 
     <ListView
         android:id="@+id/londonberlin_list"
