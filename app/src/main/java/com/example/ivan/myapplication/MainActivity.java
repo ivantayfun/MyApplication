@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         //requestWindowFeature(Window.FEATURE_NO_TITLE)
         // ;
+        Log.d("ivan", "MainActivity create ");
         res = getResources();
         setContentView(R.layout.activity_main);
         v_text = "";

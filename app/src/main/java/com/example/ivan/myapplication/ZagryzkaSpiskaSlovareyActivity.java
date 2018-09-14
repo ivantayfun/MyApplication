@@ -105,7 +105,7 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
                         SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
                         Cursor cursor = database.rawQuery("SELECT sql FROM sqlite_master WHERE type = ? AND name = ?", new String[]{"table", namelessons});
                         if (!cursor.moveToFirst()) {
-                            Log.d(TAG, "Создаем новую таблицу если такой нет" );
+                            Log.d("ivan", "Создаем новую таблицу если такой нет" );
                             database.execSQL("create table if not exists " + namelessons + " (_id integer primary key autoincrement,"
                                     + "english text,"
                                     + "russian text,"
@@ -143,7 +143,7 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
                             cursor.close();
                         } else {
                             try {
-                                Log.d(TAG, "Если таблица уже есть удаляем ее и создаем снова" );
+                                Log.d("ivan", "Если таблица уже есть удаляем ее и создаем снова" );
                                 database.delete(namelessons, null, null);
                                 JSONArray contacts = new JSONArray(jsonStr);
                                 for (int i = 0; i < contacts.length(); i++) {
@@ -188,7 +188,7 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
         }
     }
     //?????? ???????? ????????????
-    private void perehodactivity() {
+    void perehodactivity() {
         //ActivitiSlovarb.hhh();
         Intent intent = new Intent(this, ActivitiSlovarb.class);
         startActivity(intent);

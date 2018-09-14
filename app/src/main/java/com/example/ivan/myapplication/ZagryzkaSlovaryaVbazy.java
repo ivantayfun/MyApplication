@@ -24,7 +24,7 @@ public class ZagryzkaSlovaryaVbazy extends Activity {
     String[] name_lesson_arr;
     String[] dbname_name_otobrajenie_arr;
     String [] args;
-
+    ZagryzkaSlovaryaVbazy zagryzkaSlovaryaVbazy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +45,14 @@ public class ZagryzkaSlovaryaVbazy extends Activity {
         args[0]="POST";
         args[1]="namelessons";
         args[2]=namelessons_id;
+        zagryzkaSlovaryaVbazy = this;
     }
 
     private class GetContacts extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Toast.makeText(ZagryzkaSlovaryaVbazy.this, getResources().getString(R.string.zagryzka_slovarya_v_bazy), Toast.LENGTH_LONG).show();
+            Toast.makeText(zagryzkaSlovaryaVbazy, getResources().getString(R.string.zagryzka_slovarya_v_bazy), Toast.LENGTH_LONG).show();
         }
 
         @Override
