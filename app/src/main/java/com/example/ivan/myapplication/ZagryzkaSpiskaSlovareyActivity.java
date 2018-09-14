@@ -1,6 +1,5 @@
 package com.example.ivan.myapplication;
 
-//import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
@@ -22,16 +21,13 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+//import android.widget.TextView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import static android.content.ContentValues.TAG;
-
-//import com.example.myapplication.R;
 
 public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements OnClickListener {
     int[] colors = new int[2];
@@ -43,9 +39,10 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
     LinearLayout slovary_activity_lnlname;
     String namelessons;
     String namelessons_otobr;
-    final int DIALOG_EXIT2 = 2;
+    //final int DIALOG_EXIT2 = 2;
     String [] args;
     private String jsonStr;
+    protected AlertDialog.Builder dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +59,12 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
         args = new String[3] ;
         args[0]="POST";
         args[1]="namelessons";
-
+        dialog = new AlertDialog.Builder(ZagryzkaSpiskaSlovareyActivity.this);
+        dialog.setTitle(R.string.dialog_zagryzitb_slovarb);
+        dialog.setIcon(android.R.drawable.ic_dialog_info);
+        dialog.setMessage(R.string.save_data);
+        dialog.setPositiveButton(R.string.ok, myClickListener2);
+        dialog.setNegativeButton(R.string.cencel, myClickListener2);
         slovary_activity_lnlname =  findViewById(R.id.slovary_activity_lnlname);
         LayoutInflater ltInflayter_bdname = getLayoutInflater();
         slovary_activity_lnlname.removeAllViews();
@@ -75,56 +77,33 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
                 item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
                 text_slovary_item.setId(i);
                 checkBox_slovary_item.setId(i);
-                //item.setBackgroundColor(colors[0]);
-                //int k = (3+i)%2;
                 item.setBackgroundColor(colors[i % 2]);
                 checkBox_slovary_item.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                         dbname_checked_arr[compoundButton.getId()] = compoundButton.isChecked();
-                                /*for (int k =0; k < jjj;k++) {
-                                    Log.d(TAG, "Выводим сообщение о начале загрузки " + dbname_checked_arr[k]);
-                                }*/
-
-                        //compoundButton.isChecked();
                     }
                 });
-                /*text_slovary_item.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        londonberlinfynk(v.getId());
-                    }
-                });*/
                 slovary_activity_lnlname.addView(item);
             }
         }
     }
-
     public class ZagrSlovAsyncTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.zagryzka_slovarya_v_bazy), Toast.LENGTH_SHORT).show();
         }
-
         @Override
         protected Void doInBackground(Void... arg0) {
             for (int k = 0;k<dbname_checked_arr.length;k++){
                 if (dbname_checked_arr[k]){
                     args[2]= Integer.toString(name_lesson_id_arr[k]);
-                    //Log.d(TAG, "Запускаем актив синк" );
                     jsonStr = URLConnectionExample.main(args);
-                    //Log.e(TAG, "Response from url: " + jsonStr);
                     namelessons = name_lesson_arr[k];
                     namelessons_otobr = name_lesson_otobr_arr[k];
-                    //namelessons = Integer.toString(name_lesson_id_arr[k]);
-                    //(name_lesson_arr[k],Integer.toString(name_lesson_id_arr[k]));
-
-
                     if (!jsonStr.equals("")) {
-
                         SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
-
                         Cursor cursor = database.rawQuery("SELECT sql FROM sqlite_master WHERE type = ? AND name = ?", new String[]{"table", namelessons});
                         if (!cursor.moveToFirst()) {
                             Log.d(TAG, "Создаем новую таблицу если такой нет" );
@@ -135,9 +114,6 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
                                     + "kolotv integer,"
                                     + "vid integer );");
                             try {
-                                //contacts = new JSONObject(jsonStr);
-                                //JSONObject dataJsonObj = new JSONObject(jsonStr);
-                                //JSONArray contacts = dataJsonObj.getJSONArray("");
                                 JSONArray contacts = new JSONArray(jsonStr);
                                 ContentValues cv1 = new ContentValues();
                                 cv1.put("name", namelessons);
@@ -160,12 +136,9 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
                                 }
                             } catch (final JSONException e) {
                                 Log.e(TAG, "Json parsing error: " + e.getMessage());
-
                                 Toast.makeText(getApplicationContext(),
                                         "Json parsing error: " + e.getMessage(),
                                         Toast.LENGTH_LONG).show();
-
-
                             }
                             dbOpenHelper.close();
                             cursor.close();
@@ -173,12 +146,7 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
                             try {
                                 Log.d(TAG, "Если таблица уже есть удаляем ее и создаем снова" );
                                 database.delete(namelessons, null, null);
-                                //database.delete("tablename","name = " + namelessons, null);
                                 JSONArray contacts = new JSONArray(jsonStr);
-                                //ContentValues cv1 = new ContentValues();
-                                //cv1.put("name", namelessons);
-                                //cv1.put("name_otobrajenie", namelessons);
-                                //database.insert("tablename", null, cv1);
                                 for (int i = 0; i < contacts.length(); i++) {
                                     JSONObject c = contacts.getJSONObject(i);
                                     int id = c.getInt("id");
@@ -200,8 +168,6 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
                                 Toast.makeText(getApplicationContext(),
                                         "Json parsing error: " + e.getMessage(),
                                         Toast.LENGTH_LONG).show();
-
-
                             }
                             dbOpenHelper.close();
                             cursor.close();
@@ -209,35 +175,17 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
                         }
                     } else {
                         Log.e(TAG, "Couldn't get json from server.");
-
                         Toast.makeText(getApplicationContext(),
                                 "Couldn't get json from server. Check LogCat for possible errors!",
                                 Toast.LENGTH_LONG).show();
-
-
                     }
-
-
-
-
                 }
             }
-
-
-
-
-
-
-
-
-
             return null;
         }
-
         @Override
         protected void onPostExecute(Void result) {
             perehodactivity();
-
         }
     }
     //?????? ???????? ????????????
@@ -250,7 +198,6 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
     }
     @Override
     public void onClick(View v) {
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -274,7 +221,8 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
                 proiznosheniefunk();
                 break;
             case R.id.skachatb_vbIbrannbIe:
-                showDialog(DIALOG_EXIT2);
+                dialog.show();
+                //showDialog(DIALOG_EXIT2);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -296,7 +244,6 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
         Intent intent = new Intent(this, ActivitiSlovarb.class);
         startActivity(intent);
         finish();
-
     }
     //ФУНКЦИИ ЗАПУСТКА АКТИВИТИ ПРОИЗНОШЕНИЕ
     private void proiznosheniefunk() {
@@ -304,31 +251,9 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
         startActivity(intent);
         finish();
     }
-    protected Dialog onCreateDialog(int id) {
-
-        if (id == DIALOG_EXIT2) {
-            AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            // заголовок
-            adb.setTitle(R.string.dialog_zagryzitb_slovarb);
-            // сообщение
-            //adb.setMessage(R.string.save_data);
-            // иконка
-            adb.setIcon(android.R.drawable.ic_dialog_info);
-            // кнопка положительного ответа
-            adb.setPositiveButton(R.string.ok, myClickListener2);
-            // кнопка отрицательного ответа
-            adb.setNegativeButton(R.string.cencel, myClickListener2);
-            // делаем незакрываемым по кнопке назад
-            //adb.setCancelable(false);
-            // создаем диалог
-            return adb.create();
-        }
-        return super.onCreateDialog(id);
-    }
     public void zagryzitb_slovarb(){
         new ZagrSlovAsyncTask().execute();
     }
-
     DialogInterface.OnClickListener myClickListener2 = new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int which) {
             switch (which) {
