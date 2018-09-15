@@ -44,10 +44,6 @@
             android:configChanges="orientation">
         </activity>
         <activity
-            android:name=".LondonBerlinActivity"
-            android:label="@string/title_activity_londonberlin" >
-        </activity>
-        <activity
             android:name=".ZagryzkaSpiskaSlovareyActivity"
             android:label="@string/title_activity_londonberlin" >
         </activity>

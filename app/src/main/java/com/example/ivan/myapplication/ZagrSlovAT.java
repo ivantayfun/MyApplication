@@ -22,17 +22,14 @@ import static android.content.ContentValues.TAG;
 
 public class ZagrSlovAT extends AsyncTask<Void, Void, Void> {
     ZagryzkaSpiskaSlovareyActivity context;
-    int[] colors = new int[2];
-    ExternalDbOpenHelper dbOpenHelper;
-    boolean[] dbname_checked_arr;
-    String[] name_lesson_arr;
-    String[] name_lesson_otobr_arr;
-    int[] name_lesson_id_arr;
+    private ExternalDbOpenHelper dbOpenHelper;
+    private boolean[] dbname_checked_arr;
+    private String[] name_lesson_arr;
+    private String[] name_lesson_otobr_arr;
+    private int[] name_lesson_id_arr;
     LinearLayout slovary_activity_lnlname;
-    String namelessons;
-    String namelessons_otobr;
     //final int DIALOG_EXIT2 = 2;
-    String [] args;
+    private String [] args;
     private String jsonStr;
     protected AlertDialog.Builder dialog;
     ZagrSlovAT (ZagryzkaSpiskaSlovareyActivity context,String[] name_lesson_arr,int[] name_lesson_id_arr,String[] name_lesson_otobr_arr){
@@ -48,6 +45,7 @@ public class ZagrSlovAT extends AsyncTask<Void, Void, Void> {
         //name_lesson_arr = intent.getStringArrayExtra("name_lesson_arr");
         //name_lesson_id_arr = intent.getIntArrayExtra("name_lesson_id_arr");
         //name_lesson_otobr_arr = intent.getStringArrayExtra("name_lesson_otobr_arr");
+        int[] colors = new int[2];
         colors[0] = Color.parseColor("#fffbfdff");
         colors[1] = Color.parseColor("#fffbfdff");
         args = new String[3] ;
@@ -67,8 +65,8 @@ public class ZagrSlovAT extends AsyncTask<Void, Void, Void> {
             if (dbname_checked_arr[k]){
                 args[2]= Integer.toString(name_lesson_id_arr[k]);
                 jsonStr = URLConnectionExample.main(args);
-                namelessons = name_lesson_arr[k];
-                namelessons_otobr = name_lesson_otobr_arr[k];
+                String namelessons = name_lesson_arr[k];
+                String namelessons_otobr = name_lesson_otobr_arr[k];
                 if (!jsonStr.equals("")) {
                     SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
                     Cursor cursor = database.rawQuery("SELECT sql FROM sqlite_master WHERE type = ? AND name = ?", new String[]{"table", namelessons});

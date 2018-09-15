@@ -1,50 +1,24 @@
 package com.example.ivan.myapplication;
 
-//import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-//import com.example.myapplication.ExternalDbOpenHelper;
-//import com.example.myapplication.R;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
-
-//import android.app.AlertDialog;
-//import android.app.Dialog;
-//import android.content.ContentValues;
-//import android.content.DialogInterface;
-//import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-//import android.database.sqlite.SQLiteOpenHelper;
-//import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
-//import android.view.Menu;
-//import android.view.MenuItem;
 import android.app.Activity;
 import android.view.View;
-//import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-//import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.graphics.Color;
-//import android.app.Activity;
-//import android.app.AlertDialog;
-//import android.app.Dialog;
-//import android.content.DialogInterface;
-//import android.content.DialogInterface.OnClickListener;
-//import android.os.Bundle;
-//import android.view.View;
-//import android.widget.Toast;
-
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -82,7 +56,6 @@ public class GramatikaMainActivity extends Activity implements View.OnClickListe
     Button btn_steretb;
     Button btn_otvetitb;
     Button btn_dalshe;
-
     ExternalDbOpenHelper dbOpenHelper;
     LinearLayout linLayout;
 
@@ -123,7 +96,6 @@ public class GramatikaMainActivity extends Activity implements View.OnClickListe
             gramatika_time_funk(GRAMATIKA_TIME_VBAZE);
         }
     }
-
     public void zagryzkavbazy() {
         saveText(perv_zap, "0");
         saveText(GRAMATIKA_ENGLISH_TIME, "Present Simple");
@@ -140,7 +112,6 @@ public class GramatikaMainActivity extends Activity implements View.OnClickListe
         Parser_DATA = sp.getString(nidname, "");
         return Parser_DATA;
     }
-
     public void gramatika_time_funk(String gramname) {
         id_predlojeniu = 0;
         String tabgramname = "[" + gramname + "]";
@@ -169,7 +140,6 @@ public class GramatikaMainActivity extends Activity implements View.OnClickListe
             c.close();
         } else text_russian.setText("Нет данных");
         dbOpenHelper.close();
-
     }
     public void sled_predloj_funk() {
         tmp2 = "";
@@ -203,7 +173,6 @@ public class GramatikaMainActivity extends Activity implements View.OnClickListe
                 // следующий элемент
                 xpp.next();
             }
-
         } catch (XmlPullParserException | IOException e) {
             e.printStackTrace();
         }
@@ -243,8 +212,6 @@ public class GramatikaMainActivity extends Activity implements View.OnClickListe
         gramatikamain_activity_lnlname =  findViewById(R.id.gramatikamain_activity_lnlname);
         gramatikamain_activity_lnlname.removeAllViews();
         LayoutInflater ltInflayter_bdname = getLayoutInflater();
-
-
         for (int i = 0; i < kol_slov; i++) {
             //double ostatok = Math.IEEEremainder(i, 2);
             View item = ltInflayter_bdname.inflate(R.layout.gramatikamain_item, gramatikamain_activity_lnlname, false);

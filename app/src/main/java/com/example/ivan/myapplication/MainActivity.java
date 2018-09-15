@@ -1,6 +1,5 @@
 package com.example.ivan.myapplication;
 
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
@@ -24,16 +23,9 @@ import android.widget.TextView;
 import android.view.ViewGroup.LayoutParams;
 import android.graphics.Color;
 import android.content.DialogInterface.OnClickListener;
-
-/*import android.content.Context;
-
-//import java.util.Locale;*/
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
-    final int DIALOG_EXIT = 1;
-    final int DIALOG_EXIT2 = 2;
     TextView my_text;
     TextView my_text1;
     TextView my_text2;
@@ -84,14 +76,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean chereda;
     boolean dopic;
     String[] locale_lang_arr;
-    //String lang1;
     Resources res;
-    //Context context;
-    //locales locale;
-    //Locale localeg;
-    //Locale hhh;
     ExternalDbOpenHelper dbOpenHelper;
     LinearLayout linLayout;
+    protected AlertDialog.Builder dialog;
+    protected AlertDialog.Builder dialog1;
     OnClickListener myClickListener = new OnClickListener() {
         public void onClick(DialogInterface dialog, int which) {
             switch (which) {
@@ -111,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (which) {
                 // положительная кнопка
                 case Dialog.BUTTON_POSITIVE:
+                    Log.d("ivan", "перед запуском учитсначалафунк");
                     ychitbcnachalafynk();
                     break;
                 // негаитвная кнопка
@@ -123,8 +113,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //requestWindowFeature(Window.FEATURE_NO_TITLE)
-        // ;
         Log.d("ivan", "MainActivity create ");
         res = getResources();
         setContentView(R.layout.activity_main);
@@ -164,7 +152,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mark = new int[20];
         locale_lang_arr = new String[2];
         //Intent intent = getIntent();
-
+        dialog = new AlertDialog.Builder(MainActivity.this);
+        dialog.setTitle(R.string.exit_ychitb_c_nachala);
+        dialog.setIcon(android.R.drawable.ic_dialog_info);
+        //dialog.setMessage(R.string.save_data);
+        dialog.setPositiveButton(R.string.ok, myClickListener2);
+        dialog.setNegativeButton(R.string.cencel, myClickListener2);
+        dialog1 = new AlertDialog.Builder(MainActivity.this);
+        dialog1.setTitle(R.string.exit);
+        dialog1.setIcon(android.R.drawable.ic_dialog_info);
+        dialog1.setMessage(R.string.save_data);
+        dialog1.setPositiveButton(R.string.ychitb_zanovo, myClickListener);
+        dialog1.setNegativeButton(R.string.vubratb_drygoi_slovarb, myClickListener);
         //если приложение уже загружалось в преференснастройках perv_zap будет равно 0 а не NULL
         perv_zap_marker = loadText(perv_zap);
         //определяе загружалось ли приложение
@@ -178,7 +177,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             cozdallict();
         }
     }
-
     private void zagryzkavbazy() {
         //SQLiteDatabase database = dbOpenHelper.openDataBase();
         saveText(perv_zap, "0");
@@ -192,20 +190,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cozdallict();
         dbOpenHelper.close();
     }
-
     private void saveText(String nidname, String nidname_text) {
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         Editor ed = sp.edit();
         ed.putString(nidname, nidname_text);
         ed.apply();
     }
-
     private String loadText(String nidname) {
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         Parser_DATA = sp.getString(nidname, "");
         return Parser_DATA;
     }
-
     private void loadPars() {
         kol_variantu = Integer.valueOf(loadText("variantu"));
         kol_otvetu = Integer.valueOf(loadText("otvetu"));
@@ -225,19 +220,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //ЗАПУСК ДРУГИХ АКТИВИТИ
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
             case R.id.ychitbcnachala:
-                showDialog(DIALOG_EXIT2);
+                dialog.show();
                 break;
             case R.id.nastroiki:
                 nastroikifynk();
@@ -257,14 +250,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return super.onOptionsItemSelected(item);
     }
-
     //ФУНКЦИИ ЗАПУСТКА АКТИВИТИ ПРОИЗНОШЕНИЕ
     private void proiznosheniefunk() {
         Intent intent = new Intent(this, ProiznoshenieActivity.class);
         startActivity(intent);
         //finish();
     }
-
     //ЗАПУСК АКТИВИТИ ГРАМАТИКА
     private void gramatikafunk() {
         Intent intent = new Intent(this, GramatikaActivity.class);
@@ -283,20 +274,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
 
     }
-
-    //ЗАПУСК АКТИВИТИ СЛОВАРИ
-//    private void slovarifynk2() {
-//        Intent intent = new Intent(this, ActivitySlovarbList.class);
-//        startActivity(intent);
-//        finish();
-//    }
-
-    //ЗАПУСК АКТИВИТИ ЛОНДОНБЕРЛИН
-    /*private void londonberlinfynk() {
-        Intent intent = new Intent(this, LondonBerlinActivity.class);
-        startActivity(intent);
-
-    }*/
 
     //ЗАПУСК АКТИВИТИ ЛОНДОНБЕРЛИН
     private void londonberlinfynk2() {
@@ -339,14 +316,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         vgetid = "";
         loadPars();
         MY_TABLE = loadText(TABLE_NAME_PARSER);
-
-
-
-
-
             cozdallict();
-
-
     }
 
     @Override
@@ -362,12 +332,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //ФУНКЦИЯ ОБНУЛЕНИЯ ПРАВИЛЬНЫХ ОТВЕТОВ В СЛОВАРЕ
     private void ychitbcnachalafynk() {
+        Log.d("ivan", "запуск учитсначалафунк");
         linLayout.removeAllViews();
-        //SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
+        SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("kolotv", "0");
         cv.put("vid", "0");
-        //int clearCount = database.update(MY_TABLE, cv, null, null);
+        database.update(MY_TABLE, cv, null, null);
         id_vbazezapicb = "";
         vgetid = "";
         MY_TABLE = loadText(TABLE_NAME_PARSER);
@@ -484,16 +455,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             my_text.setText(russian_arr[mark[my_rand]]);
                             my_text1.setText("");
-
                         }
                         tvName.setText(english_arr[mark[k]]);
                         tvName2.setText(transcription_arr[mark[k]]);
-
                     } else {
                         if (k == my_rand) {
                             my_text.setText(english_arr[mark[my_rand]]);
                             my_text1.setText(transcription_arr[mark[my_rand]]);
-
                         }
                         tvName.setText(russian_arr[mark[k]]);
                         tvName2.setText("");
@@ -526,53 +494,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 linLayout.removeAllViews();
                 c.close();
-                showDialog(DIALOG_EXIT);
+                dialog1.show();
             }
         }
         dbOpenHelper.close();
-
     }
-
-    protected Dialog onCreateDialog(int id) {
-        if (id == DIALOG_EXIT) {
-            AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            // заголовок
-            adb.setTitle(R.string.exit);
-            // сообщение
-            adb.setMessage(R.string.save_data);
-            // иконка
-            adb.setIcon(android.R.drawable.ic_dialog_info);
-            // кнопка положительного ответа
-            adb.setPositiveButton(R.string.ychitb_zanovo, myClickListener);
-            // кнопка отрицательного ответа
-            adb.setNegativeButton(R.string.vubratb_drygoi_slovarb, myClickListener);
-            // делаем незакрываемым по кнопке назад
-            //adb.setCancelable(false);
-            // создаем диалог
-            return adb.create();
-        }
-        if (id == DIALOG_EXIT2) {
-            AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            // заголовок
-            adb.setTitle(R.string.exit_ychitb_c_nachala);
-            // сообщение
-            //adb.setMessage(R.string.save_data);
-            // иконка
-            adb.setIcon(android.R.drawable.ic_dialog_info);
-            // кнопка положительного ответа
-            adb.setPositiveButton(R.string.ok, myClickListener2);
-            // кнопка отрицательного ответа
-            adb.setNegativeButton(R.string.cencel, myClickListener2);
-            // делаем незакрываемым по кнопке назад
-            //adb.setCancelable(false);
-            // создаем диалог
-            return adb.create();
-        }
-        return super.onCreateDialog(id);
-    }
-
     @Override
     public void onClick(View v) {
     }
-
 }

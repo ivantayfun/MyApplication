@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.util.Log;
 import java.net.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+
 public class URLConnectionExample extends Activity{
     public static String main(String [] args)  {
         StringBuilder content = new StringBuilder();
@@ -18,7 +20,7 @@ public class URLConnectionExample extends Activity{
             ddd.setDoOutput(true);
             OutputStream os = ddd.getOutputStream();
             BufferedWriter writer = new BufferedWriter(
-            new OutputStreamWriter(os, "UTF-8"));
+            new OutputStreamWriter(os, StandardCharsets.UTF_8));
             writer.write(args[1]+"="+args[2]);
             writer.flush();
             writer.close();

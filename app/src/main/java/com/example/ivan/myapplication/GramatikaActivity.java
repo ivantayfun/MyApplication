@@ -1,17 +1,7 @@
 package com.example.ivan.myapplication;
 
-//import com.example.myapplication.ExternalDbOpenHelper;
-//import com.example.myapplication.R;
-
-//import android.content.ContentValues;
-//import android.app.Dialog;
 import android.content.Intent;
-//import android.content.SharedPreferences;
-//import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences;
-//import android.database.Cursor;
-//import android.database.sqlite.SQLiteDatabase;
-//import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -19,25 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-//import android.app.Activity;
 import android.view.View;
-//import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-
-
-//import org.xmlpull.v1.XmlPullParser;
-
-//import java.io.IOException;
-//import java.util.Random;
-
-//import android.support.v7.app.ActionBarActivity;
-//import android.os.Bundle;
-//import android.view.Menu;
-//import android.view.MenuItem;
-
 
 public class GramatikaActivity extends AppCompatActivity implements OnClickListener {
 
@@ -56,13 +32,9 @@ public class GramatikaActivity extends AppCompatActivity implements OnClickListe
         colors[1] = Color.parseColor("#ff86ff9e");
         colors[2] = Color.parseColor("#ffff8e8d");
         colors[3] = Color.parseColor("#fffdff95");
-
         gramatika_activity_lnlname =  findViewById(R.id.gramatika_activity_lnlname);
-
-
             LayoutInflater ltInflayter_bdname = getLayoutInflater();
                 gramatika_activity_lnlname.removeAllViews();
-
         for (int i = 0; i < english_times.length; i++) {
             View item = ltInflayter_bdname.inflate(R.layout.gramatika_item, gramatika_activity_lnlname, false);
             TextView text_slovary_item =  item.findViewById(R.id.text_gramatika_item);
@@ -78,7 +50,6 @@ public class GramatikaActivity extends AppCompatActivity implements OnClickListe
             }else if (i==9||i==10||i==11){
                 item.setBackgroundColor(colors[3]);
             }
-
             text_slovary_item.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -112,7 +83,6 @@ public class GramatikaActivity extends AppCompatActivity implements OnClickListe
         getMenuInflater().inflate(R.menu.menu_gramatika, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -154,10 +124,8 @@ public class GramatikaActivity extends AppCompatActivity implements OnClickListe
         Intent intent = new Intent(this, ZagryzkaSpiskaSlovarey.class);
         startActivity(intent);
         finish();
-
     }
     @Override
     public void onClick(View v) {
-
     }
 }

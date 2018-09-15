@@ -28,6 +28,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class ZagryzkaSpiskaSlovarey extends Activity {
     String jsonStr;
@@ -107,7 +108,7 @@ public class ZagryzkaSpiskaSlovarey extends Activity {
                 ddd.setDoInput(true);
                 ddd.setDoOutput(true);
                 OutputStream os = ddd.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
                 writer.write(args[1]+"="+args[2]);
                 writer.flush();
                 writer.close();
