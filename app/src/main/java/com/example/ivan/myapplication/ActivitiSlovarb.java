@@ -14,6 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,7 +41,8 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
     //boolean[] dbname_checked_arr;
     LinearLayout slovary_activity_lnlname;
     String namelessons;
-    final int DIALOG_EXIT2 = 2;
+    protected AlertDialog.Builder dialog;
+    //final int DIALOG_EXIT2 = 2;
     //private String TAG = MainActivity.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,68 +53,77 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
         //Если нужно менять цвет задаем програмно
         //colors[0] = Color.parseColor("#ffffffff");
 
-        dbname_id_arr = new ArrayList<>();
-        dbname_name_arr = new ArrayList<>();
-        dbname_name_otobrajenie_arr = new ArrayList<>();
-        dbname_checked_arr = new ArrayList<>();
+
         slovary_activity_lnlname = findViewById(R.id.slovary_activity_lnlname);
+        dialog = new AlertDialog.Builder(ActivitiSlovarb.this);
+        dialog.setTitle(R.string.ydalitb_slovarb);
+        dialog.setIcon(android.R.drawable.ic_dialog_info);
+        dialog.setMessage(R.string.dialog_ydalitb_slovarb);
+        dialog.setPositiveButton(R.string.ok, myClickListener2);
+        dialog.setNegativeButton(R.string.cencel, myClickListener2);
         sozdlistslovarb ();
 
+
     }
-//public abstract void hhh();
-public  void sozdlistslovarb (){
-    slovary_activity_lnlname.removeAllViews();
-    dbOpenHelper = new ExternalDbOpenHelper(this, "mydatabase.sqlite");
-    database = dbOpenHelper.getWritableDatabase();
-    Cursor c = database.query("tablename", null, null, null, null, null, null);
-    if (c != null) {
-        if (c.getCount() > 0) {
-            LayoutInflater ltInflayter_bdname = getLayoutInflater();
-            slovary_activity_lnlname.removeAllViews();
-            if (c.moveToFirst()) {
-                int i = 0;
-                //final int jjj = c.getCount();
-                do {
+    //public abstract void hhh();
+    public  void sozdlistslovarb (){
+        Log.d("ivan", "sozdlistslovarb");
+        slovary_activity_lnlname.removeAllViews();
+        dbOpenHelper = new ExternalDbOpenHelper(this, "mydatabase.sqlite");
+        database = dbOpenHelper.getWritableDatabase();
+        Cursor c = database.query("tablename", null, null, null, null, null, null);
+        if (c != null) {
+            if (c.getCount() > 0) {
+                LayoutInflater ltInflayter_bdname = getLayoutInflater();
+                slovary_activity_lnlname.removeAllViews();
+                dbname_id_arr = new ArrayList<>();
+                dbname_name_arr = new ArrayList<>();
+                dbname_name_otobrajenie_arr = new ArrayList<>();
+                dbname_checked_arr = new ArrayList<>();
+                if (c.moveToFirst()) {
+                    int i = 0;
+                    //final int jjj = c.getCount();
+                    do {
 
-                    dbname_id_arr.add(c.getInt(c.getColumnIndex("_id")));
-                    dbname_name_arr.add(c.getString(c.getColumnIndex("name")));
-                    dbname_name_otobrajenie_arr.add(c.getString(c.getColumnIndex("name_otobrajenie")));
-                    dbname_checked_arr.add(false);
-                    View item = ltInflayter_bdname.inflate(R.layout.slovari_item, slovary_activity_lnlname, false);
-                    TextView text_slovary_item =  item.findViewById(R.id.text_slovary_item);
-                    CheckBox checkBox_slovary_item = item.findViewById(R.id.checkBox_slovary_item);
-                    text_slovary_item.setText(dbname_name_otobrajenie_arr.get(i));
-                    item.getLayoutParams().width = LayoutParams.MATCH_PARENT;
-                    text_slovary_item.setId(i);
-                    checkBox_slovary_item.setId(i);
-                    //Если нужно менять цвет заливки задаем програмно
-                    //item.setBackgroundColor(colors[0]);
-                    checkBox_slovary_item.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                           dbname_checked_arr.set(compoundButton.getId(),compoundButton.isChecked());
+                        dbname_id_arr.add(c.getInt(c.getColumnIndex("_id")));
+                        dbname_name_arr.add(c.getString(c.getColumnIndex("name")));
+                        dbname_name_otobrajenie_arr.add(c.getString(c.getColumnIndex("name_otobrajenie")));
+                        dbname_checked_arr.add(false);
+                        View item = ltInflayter_bdname.inflate(R.layout.slovari_item, slovary_activity_lnlname, false);
+                        TextView text_slovary_item =  item.findViewById(R.id.text_slovary_item);
+                        CheckBox checkBox_slovary_item = item.findViewById(R.id.checkBox_slovary_item);
+                        text_slovary_item.setText(dbname_name_otobrajenie_arr.get(i));
+                        item.getLayoutParams().width = LayoutParams.MATCH_PARENT;
+                        text_slovary_item.setId(i);
+                        checkBox_slovary_item.setId(i);
+                        //Если нужно менять цвет заливки задаем програмно
+                        //item.setBackgroundColor(colors[0]);
+                        checkBox_slovary_item.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                                dbname_checked_arr.set(compoundButton.getId(),compoundButton.isChecked());
 
-                        }
-                    });
-                    text_slovary_item.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+                            }
+                        });
+                        text_slovary_item.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
-                            mainvozvrat(dbname_name_arr.get(v.getId()));
+                                mainvozvrat(dbname_name_arr.get(v.getId()));
 
-                        }
-                    });
-                    //textview_arr[i] = text_slovary_item;
-                    registerForContextMenu(text_slovary_item);
-                    slovary_activity_lnlname.addView(item);
-                    i++;
-                } while (c.moveToNext());
+                            }
+                        });
+                        //textview_arr[i] = text_slovary_item;
+                        registerForContextMenu(text_slovary_item);
+                        slovary_activity_lnlname.addView(item);
+                        i++;
+                    } while (c.moveToNext());
+                }
             }
+            c.close();
         }
-        c.close();
+        dbOpenHelper.close();
     }
- dbOpenHelper.close();
-}
 
 
 
@@ -191,7 +202,7 @@ public  void sozdlistslovarb (){
                 londonberlinfynk2();
                 break;
             case R.id.ydalitb_slovarb:
-                showDialog(DIALOG_EXIT2);
+                dialog.show();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -220,7 +231,7 @@ public  void sozdlistslovarb (){
         startActivity(intent);
         finish();
     }
-    protected Dialog onCreateDialog(int id) {
+    /*protected Dialog onCreateDialog(int id) {
 
         if (id == DIALOG_EXIT2) {
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
@@ -240,7 +251,7 @@ public  void sozdlistslovarb (){
             return adb.create();
         }
         return super.onCreateDialog(id);
-    }
+    }*/
     DialogInterface.OnClickListener myClickListener2 = new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int which) {
             switch (which) {
@@ -254,42 +265,6 @@ public  void sozdlistslovarb (){
             }
         }
     };
-
-    /*@Override
-    public void onCreateContextMenu(ContextMenu menu, View v,ContextMenu.ContextMenuInfo menuInfo) {
-
-
-        menu.add(0, dbname_id_arr[v.getId()], 0, "del" + dbname_name_arr[v.getId()]);
-        //R.string.del_slovar Integer.toString(v.getId())
-    }*/
-    /*@Override
-    public boolean onContextItemSelected(MenuItem item) {
-       // switch (item.getItemId()) {
-            //tvColor
-
-               // case 1:
-        for (int i = 0; i < dbname_name_arr.length; i++) {
-            if(item.getItemId()== dbname_id_arr[i]) {
-                dbOpenHelper = new ExternalDbOpenHelper(this, "mydatabase.sqlite");
-                database = dbOpenHelper.getWritableDatabase();
-                database.delete(dbname_name_arr[i], null, null);
-                //database.execSQL("DROP TABLE " + "animals");
-                //database.delete("tablename", "_id = " + dbname_id_arr[i], null);
-
-                dbOpenHelper.close();
-            }
-        }
-                   // break;
-
-
-
-        //}
-        //return super.onContextItemSelected(item);
-        //item.setText();
-        return super.onContextItemSelected(item);
-    }
-*/
-
     @Override
     public void onClick(View v) {
 
