@@ -1,8 +1,5 @@
 package com.example.ivan.myapplication;
 
-
-//import com.example.ivan.myapplication.R;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
@@ -25,7 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-
 import java.util.ArrayList;
 
 public class ActivitiSlovarb extends AppCompatActivity implements OnClickListener {
@@ -36,14 +32,9 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
     ArrayList<String> dbname_name_arr;
     ArrayList<String> dbname_name_otobrajenie_arr;
     ArrayList<Boolean> dbname_checked_arr;
-    //int[] textview_arr_id;
-    //int[] colors = new int[1];
-    //boolean[] dbname_checked_arr;
     LinearLayout slovary_activity_lnlname;
     String namelessons;
     protected AlertDialog.Builder dialog;
-    //final int DIALOG_EXIT2 = 2;
-    //private String TAG = MainActivity.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +43,6 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
         namelessons = intent.getStringExtra("name_lesson");
         //Если нужно менять цвет задаем програмно
         //colors[0] = Color.parseColor("#ffffffff");
-
-
         slovary_activity_lnlname = findViewById(R.id.slovary_activity_lnlname);
         dialog = new AlertDialog.Builder(ActivitiSlovarb.this);
         dialog.setTitle(R.string.ydalitb_slovarb);
@@ -62,10 +51,7 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
         dialog.setPositiveButton(R.string.ok, myClickListener2);
         dialog.setNegativeButton(R.string.cencel, myClickListener2);
         sozdlistslovarb ();
-
-
     }
-    //public abstract void hhh();
     public  void sozdlistslovarb (){
         Log.d("ivan", "sozdlistslovarb");
         slovary_activity_lnlname.removeAllViews();
@@ -82,9 +68,7 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
                 dbname_checked_arr = new ArrayList<>();
                 if (c.moveToFirst()) {
                     int i = 0;
-                    //final int jjj = c.getCount();
                     do {
-
                         dbname_id_arr.add(c.getInt(c.getColumnIndex("_id")));
                         dbname_name_arr.add(c.getString(c.getColumnIndex("name")));
                         dbname_name_otobrajenie_arr.add(c.getString(c.getColumnIndex("name_otobrajenie")));
@@ -102,15 +86,12 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
                             @Override
                             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                                 dbname_checked_arr.set(compoundButton.getId(),compoundButton.isChecked());
-
                             }
                         });
                         text_slovary_item.setOnClickListener(new OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
                                 mainvozvrat(dbname_name_arr.get(v.getId()));
-
                             }
                         });
                         //textview_arr[i] = text_slovary_item;
@@ -124,16 +105,12 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
         }
         dbOpenHelper.close();
     }
-
-
-
     //ЗАПУСК АКТИВИТИ ЛОНДОНБЕРЛИН
     private void londonberlinfynk2() {
         Intent intent = new Intent(this, ZagryzkaSpiskaSlovarey.class);
         startActivity(intent);
         finish();
     }
-
     //ЗАПУСК АКТИВИТИ ЛОНДОНБЕРЛИН
     private void mainvozvrat(String fff) {
         //saveText(TABLE_NAME_PARSER, "animals");
@@ -143,7 +120,6 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
         ed.apply();
         finish();
     }
-
     //ФУНКЦИЯ УДАЛЕНИЯ СЛОВАРЯ
     private void ydalitb_slovarb() {
         dbOpenHelper = new ExternalDbOpenHelper(this, "mydatabase.sqlite");
@@ -153,7 +129,6 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
             if (cursor.getCount() > 0) {
                 if (cursor.moveToFirst()) {
                     int i = 0;
-                    //final int jjj = c.getCount();
                     do {
                         if (dbname_checked_arr.get(i)){
                             database.execSQL("drop table if exists " + dbname_name_arr.get(i) +";");
@@ -169,14 +144,9 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
             }
             cursor.close();
         }
-
-
         dbOpenHelper.close();
         sozdlistslovarb ();
     }
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activiti_slovarb, menu);
@@ -231,27 +201,6 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
         startActivity(intent);
         finish();
     }
-    /*protected Dialog onCreateDialog(int id) {
-
-        if (id == DIALOG_EXIT2) {
-            AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            // заголовок
-            adb.setTitle(R.string.dialog_ydalitb_slovarb);
-            // сообщение
-            //adb.setMessage(R.string.save_data);
-            // иконка
-            adb.setIcon(android.R.drawable.ic_dialog_info);
-            // кнопка положительного ответа
-            adb.setPositiveButton(R.string.ok, myClickListener2);
-            // кнопка отрицательного ответа
-            adb.setNegativeButton(R.string.cencel, myClickListener2);
-            // делаем незакрываемым по кнопке назад
-            //adb.setCancelable(false);
-            // создаем диалог
-            return adb.create();
-        }
-        return super.onCreateDialog(id);
-    }*/
     DialogInterface.OnClickListener myClickListener2 = new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int which) {
             switch (which) {
@@ -267,6 +216,5 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
     };
     @Override
     public void onClick(View v) {
-
     }
 }
