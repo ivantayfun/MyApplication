@@ -132,6 +132,7 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
                                     cv.put("kolotv", 0);
                                     cv.put("vid", 0);
                                     database.insert(namelessons, null, cv);
+                                    //assert i>0;
                                 }
                             } catch (final JSONException e) {
                                 Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -170,7 +171,7 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
                             }
                             dbOpenHelper.close();
                             cursor.close();
-                            perehodactivity();
+                            smenaactivityfynk(ActivitiSlovarb.class);
                         }
                     } else {
                         Log.e(TAG, "Couldn't get json from server.");
@@ -184,16 +185,8 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
         }
         @Override
         protected void onPostExecute(Void result) {
-            perehodactivity();
+            smenaactivityfynk(ActivitiSlovarb.class);
         }
-    }
-    //?????? ???????? ????????????
-    void perehodactivity() {
-        //ActivitiSlovarb.hhh();
-        Intent intent = new Intent(this, ActivitiSlovarb.class);
-        startActivity(intent);
-        finish();
-
     }
     @Override
     public void onClick(View v) {
@@ -208,45 +201,30 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
         int id = item.getItemId();
         switch (id) {
             case R.id.nastroiki:
-                nastroikifynk();
+                //ЗАПУСК АКТИВИТИ НАСТРОЙКИ
+                smenaactivityfynk(PrefActivity.class);
                 break;
             case R.id.gramatika:
-                gramatikafunk();
+                //ЗАПУСК АКТИВИТИ ГРАМАТИКА
+                smenaactivityfynk(GramatikaActivity.class);
                 break;
             case R.id.slovari:
-                slovarifynk();
+                //ЗАПУСК АКТИВИТИ СЛОВАРИ
+                smenaactivityfynk(ActivitiSlovarb.class);
                 break;
             case R.id.proiznoshenie:
-                proiznosheniefunk();
+                //ЗАПУСТК АКТИВИТИ ПРОИЗНОШЕНИЕ
+                smenaactivityfynk(ProiznoshenieActivity.class);
                 break;
             case R.id.skachatb_vbIbrannbIe:
                 dialog.show();
-                //showDialog(DIALOG_EXIT2);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
-    //ЗАПУСК АКТИВИТИ НАСТРОЙКИ
-    private void nastroikifynk() {
-        Intent intent = new Intent(this, PrefActivity.class);
-        startActivity(intent);
-        finish();
-    }
-    //ЗАПУСК АКТИВИТИ ГРАМАТИКА
-    private void gramatikafunk() {
-        Intent intent = new Intent(this, GramatikaActivity.class);
-        startActivity(intent);
-        finish();
-    }
-    //ЗАПУСК АКТИВИТИ СЛОВАРИ
-    private void slovarifynk() {
-        Intent intent = new Intent(this, ActivitiSlovarb.class);
-        startActivity(intent);
-        finish();
-    }
-    //ФУНКЦИИ ЗАПУСТКА АКТИВИТИ ПРОИЗНОШЕНИЕ
-    private void proiznosheniefunk() {
-        Intent intent = new Intent(this, ProiznoshenieActivity.class);
+    //МЕТОД СМЕНЫ АКТИВИТИ
+    private void smenaactivityfynk(Class c) {
+        Intent intent = new Intent(this, c);
         startActivity(intent);
         finish();
     }

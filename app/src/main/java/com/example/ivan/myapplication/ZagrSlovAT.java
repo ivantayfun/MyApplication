@@ -1,19 +1,13 @@
 package com.example.ivan.myapplication;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.widget.LinearLayout;
+//import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +21,7 @@ public class ZagrSlovAT extends AsyncTask<Void, Void, Void> {
     private String[] name_lesson_arr;
     private String[] name_lesson_otobr_arr;
     private int[] name_lesson_id_arr;
-    LinearLayout slovary_activity_lnlname;
+    //LinearLayout slovary_activity_lnlname;
     //final int DIALOG_EXIT2 = 2;
     private String [] args;
     private String jsonStr;
@@ -41,13 +35,14 @@ public class ZagrSlovAT extends AsyncTask<Void, Void, Void> {
         //Intent intent = getIntent();
         jsonStr = "";
         dbname_checked_arr = new boolean[20];
+        dbname_checked_arr[0]=false;
         dbOpenHelper = new ExternalDbOpenHelper(this.context, "mydatabase.sqlite");
         //name_lesson_arr = intent.getStringArrayExtra("name_lesson_arr");
         //name_lesson_id_arr = intent.getIntArrayExtra("name_lesson_id_arr");
         //name_lesson_otobr_arr = intent.getStringArrayExtra("name_lesson_otobr_arr");
-        int[] colors = new int[2];
-        colors[0] = Color.parseColor("#fffbfdff");
-        colors[1] = Color.parseColor("#fffbfdff");
+//        int[] colors = new int[2];
+//        colors[0] = Color.parseColor("#fffbfdff");
+//        colors[1] = Color.parseColor("#fffbfdff");
         args = new String[3] ;
         args[0]="POST";
         args[1]="namelessons";
@@ -136,7 +131,7 @@ public class ZagrSlovAT extends AsyncTask<Void, Void, Void> {
                         }
                         dbOpenHelper.close();
                         cursor.close();
-                        this.context.perehodactivity();
+                        //this.context.perehodactivity();
                     }
                 } else {
                     Log.e(TAG, "Couldn't get json from server.");
@@ -151,6 +146,6 @@ public class ZagrSlovAT extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         Log.d("ivan", "ZagrSlovAT  onPostExecute()");
-        this.context.perehodactivity();
+        //this.context.perehodactivity();
     }
 }

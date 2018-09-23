@@ -22,7 +22,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+
 import java.util.ArrayList;
+
 
 public class ActivitiSlovarb extends AppCompatActivity implements OnClickListener {
     ExternalDbOpenHelper dbOpenHelper;
@@ -35,6 +37,7 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
     LinearLayout slovary_activity_lnlname;
     String namelessons;
     protected AlertDialog.Builder dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +53,10 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
         dialog.setMessage(R.string.dialog_ydalitb_slovarb);
         dialog.setPositiveButton(R.string.ok, myClickListener2);
         dialog.setNegativeButton(R.string.cencel, myClickListener2);
-        sozdlistslovarb ();
+        sozdlistslovarb();
     }
-    public  void sozdlistslovarb (){
+
+    public void sozdlistslovarb() {
         Log.d("ivan", "sozdlistslovarb");
         slovary_activity_lnlname.removeAllViews();
         dbOpenHelper = new ExternalDbOpenHelper(this, "mydatabase.sqlite");
@@ -74,7 +78,7 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
                         dbname_name_otobrajenie_arr.add(c.getString(c.getColumnIndex("name_otobrajenie")));
                         dbname_checked_arr.add(false);
                         View item = ltInflayter_bdname.inflate(R.layout.slovari_item, slovary_activity_lnlname, false);
-                        TextView text_slovary_item =  item.findViewById(R.id.text_slovary_item);
+                        TextView text_slovary_item = item.findViewById(R.id.text_slovary_item);
                         CheckBox checkBox_slovary_item = item.findViewById(R.id.checkBox_slovary_item);
                         text_slovary_item.setText(dbname_name_otobrajenie_arr.get(i));
                         item.getLayoutParams().width = LayoutParams.MATCH_PARENT;
@@ -85,7 +89,7 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
                         checkBox_slovary_item.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                             @Override
                             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                                dbname_checked_arr.set(compoundButton.getId(),compoundButton.isChecked());
+                                dbname_checked_arr.set(compoundButton.getId(), compoundButton.isChecked());
                             }
                         });
                         text_slovary_item.setOnClickListener(new OnClickListener() {
@@ -105,12 +109,14 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
         }
         dbOpenHelper.close();
     }
+
     //ЗАПУСК АКТИВИТИ ЛОНДОНБЕРЛИН
     private void londonberlinfynk2() {
         Intent intent = new Intent(this, ZagryzkaSpiskaSlovarey.class);
         startActivity(intent);
         finish();
     }
+
     //ЗАПУСК АКТИВИТИ ЛОНДОНБЕРЛИН
     private void mainvozvrat(String fff) {
         //saveText(TABLE_NAME_PARSER, "animals");
@@ -120,6 +126,7 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
         ed.apply();
         finish();
     }
+
     //ФУНКЦИЯ УДАЛЕНИЯ СЛОВАРЯ
     private void ydalitb_slovarb() {
         dbOpenHelper = new ExternalDbOpenHelper(this, "mydatabase.sqlite");
@@ -130,13 +137,13 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
                 if (cursor.moveToFirst()) {
                     int i = 0;
                     do {
-                        if (dbname_checked_arr.get(i)){
-                            database.execSQL("drop table if exists " + dbname_name_arr.get(i) +";");
+                        if (dbname_checked_arr.get(i)) {
+                            database.execSQL("drop table if exists " + dbname_name_arr.get(i) + ";");
                             //database.delete(dbname_name_arr[i], null, null);
                             ContentValues cv = new ContentValues();
                             cv.put("name", "");
                             cv.put("name_otobrajenie", "");
-                            database.delete("tablename","_id = " + dbname_id_arr.get(i), null);
+                            database.delete("tablename", "_id = " + dbname_id_arr.get(i), null);
                         }
                         i++;
                     } while (cursor.moveToNext());
@@ -145,13 +152,15 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
             cursor.close();
         }
         dbOpenHelper.close();
-        sozdlistslovarb ();
+        sozdlistslovarb();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activiti_slovarb, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -177,30 +186,35 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
         }
         return super.onOptionsItemSelected(item);
     }
+
     //ЗАПУСК АКТИВИТИ НАСТРОЙКИ
     private void nastroikifynk() {
         Intent intent = new Intent(this, PrefActivity.class);
         startActivity(intent);
         finish();
     }
+
     //ЗАПУСК АКТИВИТИ ГРАМАТИКА
     private void gramatikafunk() {
         Intent intent = new Intent(this, GramatikaActivity.class);
         startActivity(intent);
         finish();
     }
+
     //ЗАПУСК АКТИВИТИ СЛОВАРИ
     private void slovarifynk() {
         /*Intent intent = new Intent(this, ActivitiSlovarb.class);
         startActivity(intent);*/
-        sozdlistslovarb ();
+        sozdlistslovarb();
     }
+
     //ФУНКЦИИ ЗАПУСТКА АКТИВИТИ ПРОИЗНОШЕНИЕ
     private void proiznosheniefunk() {
         Intent intent = new Intent(this, ProiznoshenieActivity.class);
         startActivity(intent);
         finish();
     }
+
     DialogInterface.OnClickListener myClickListener2 = new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int which) {
             switch (which) {
@@ -214,6 +228,7 @@ public class ActivitiSlovarb extends AppCompatActivity implements OnClickListene
             }
         }
     };
+
     @Override
     public void onClick(View v) {
     }
