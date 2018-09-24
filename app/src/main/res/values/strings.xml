@@ -27,7 +27,7 @@
     <string name="exit_ychitb_c_nachala">Вы уверены что хотите учить словарь с начала</string>
     <string name="save_data">Выберите следуещее действие</string>
     <string name="ychitb_zanovo">Учить заново</string>
-    <string name="internet">Загрузк невозможна проверте интернет соиденение</string>
+    <string name="internet">"Couldn\'t get json from server. Check LogCat for possible errors!"</string>
     <string name="ok">OK</string>
     <string name="cencel">Отмена</string>
     <string name="vubratb_drygoi_slovarb">Выбрать другой словарь</string>
@@ -37,6 +37,7 @@
     <string name="zagryzka_spiska_slovarey">zagryzka_spiska_slovarey</string>
     <string name="zagryzka_slovarya_v_bazy">zagryzka_slovarya_v_bazy</string>
     <string name="del_slovar">del</string>
+    <string name="Json_parsing_error">Json_parsing_error:</string>
     <string-array name="otvetu">
         <item>3</item>
         <item>4</item>

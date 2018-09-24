@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -26,6 +25,11 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import static android.content.ContentValues.TAG;
 
 public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements OnClickListener {
@@ -42,6 +46,9 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
     String [] args;
     private String jsonStr;
     protected AlertDialog.Builder dialog;
+    private static Lock lock = new ReentrantLock();
+    private static Condition condition = lock.newCondition();
+    CountDownLatch countDownLatch = new CountDownLatch(1);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,107 +94,7 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
             }
         }
     }
-    public class ZagrSlovAsyncTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            Toast.makeText(getApplicationContext(), getResources().getString(R.string.zagryzka_slovarya_v_bazy), Toast.LENGTH_SHORT).show();
-        }
-        @Override
-        protected Void doInBackground(Void... arg0) {
-            for (int k = 0;k<dbname_checked_arr.length;k++){
-                if (dbname_checked_arr[k]){
-                    args[2]= Integer.toString(name_lesson_id_arr[k]);
-                    jsonStr = URLConnectionExample.main(args);
-                    namelessons = name_lesson_arr[k];
-                    namelessons_otobr = name_lesson_otobr_arr[k];
-                    if (!jsonStr.equals("")) {
-                        SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
-                        Cursor cursor = database.rawQuery("SELECT sql FROM sqlite_master WHERE type = ? AND name = ?", new String[]{"table", namelessons});
-                        if (!cursor.moveToFirst()) {
-                            Log.d("ivan", "Создаем новую таблицу если такой нет" );
-                            database.execSQL("create table if not exists " + namelessons + " (_id integer primary key autoincrement,"
-                                    + "english text,"
-                                    + "russian text,"
-                                    + "transcription text,"
-                                    + "kolotv integer,"
-                                    + "vid integer );");
-                            try {
-                                JSONArray contacts = new JSONArray(jsonStr);
-                                ContentValues cv1 = new ContentValues();
-                                cv1.put("name", namelessons);
-                                cv1.put("name_otobrajenie", namelessons_otobr);
-                                database.insert("tablename", null, cv1);
-                                for (int i = 0; i < contacts.length(); i++) {
-                                    JSONObject c = contacts.getJSONObject(i);
-                                    int id = c.getInt("id");
-                                    String english = c.getString("english");
-                                    String russian = c.getString("russian");
-                                    String transcription = c.getString("transcription");
-                                    ContentValues cv = new ContentValues();
-                                    cv.put("_id", id);
-                                    cv.put("english", english);
-                                    cv.put("russian", russian);
-                                    cv.put("transcription", transcription);
-                                    cv.put("kolotv", 0);
-                                    cv.put("vid", 0);
-                                    database.insert(namelessons, null, cv);
-                                    //assert i>0;
-                                }
-                            } catch (final JSONException e) {
-                                Log.e(TAG, "Json parsing error: " + e.getMessage());
-                                Toast.makeText(getApplicationContext(),
-                                        "Json parsing error: " + e.getMessage(),
-                                        Toast.LENGTH_LONG).show();
-                            }
-                            dbOpenHelper.close();
-                            cursor.close();
-                        } else {
-                            try {
-                                Log.d("ivan", "Если таблица уже есть удаляем ее и создаем снова" );
-                                database.delete(namelessons, null, null);
-                                JSONArray contacts = new JSONArray(jsonStr);
-                                for (int i = 0; i < contacts.length(); i++) {
-                                    JSONObject c = contacts.getJSONObject(i);
-                                    int id = c.getInt("id");
-                                    String english = c.getString("english");
-                                    String russian = c.getString("russian");
-                                    String transcription = c.getString("transcription");
-                                    ContentValues cv = new ContentValues();
-                                    cv.put("_id", id);
-                                    cv.put("english", english);
-                                    cv.put("russian", russian);
-                                    cv.put("transcription", transcription);
-                                    cv.put("kolotv", 0);
-                                    cv.put("vid", 0);
-                                    database.insert(namelessons, null, cv);
-                                }
-                            } catch (final JSONException e) {
-                                Log.e(TAG, "Json parsing error: " + e.getMessage());
 
-                                Toast.makeText(getApplicationContext(),
-                                        "Json parsing error: " + e.getMessage(),
-                                        Toast.LENGTH_LONG).show();
-                            }
-                            dbOpenHelper.close();
-                            cursor.close();
-                            smenaactivityfynk(ActivitiSlovarb.class);
-                        }
-                    } else {
-                        Log.e(TAG, "Couldn't get json from server.");
-                        Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
-                                Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-            return null;
-        }
-        @Override
-        protected void onPostExecute(Void result) {
-            smenaactivityfynk(ActivitiSlovarb.class);
-        }
-    }
     @Override
     public void onClick(View v) {
     }
@@ -229,7 +136,9 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
         finish();
     }
     public void zagryzitb_slovarb(){
-        new ZagrSlovAsyncTask().execute();
+        //new ZagrSlovAsyncTask().execute();
+        new ThreadZagrSlovComplit(countDownLatch);
+        new ThreadZagrSlov(countDownLatch);
     }
     DialogInterface.OnClickListener myClickListener2 = new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int which) {
@@ -244,16 +153,145 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
             }
         }
     };
+    private class ThreadZagrSlovComplit extends  Thread{
+        CountDownLatch countDownLatch;
+        ThreadZagrSlovComplit(CountDownLatch countDownLatch){
+            this.countDownLatch = countDownLatch;
+            start();
+        }
+        @Override
+        public void run() {
 
+            try {
+                Log.d("ivan","ThreadZagrSlovComplit do await");
+                countDownLatch.await();
+                Log.d("ivan","ThreadZagrSlovComplit posle await");
+                smenaactivityfynk(ActivitiSlovarb.class);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
+        }
+    }
+    private class ThreadZagrSlov extends Thread{
+        CountDownLatch countDownLatch;
+        ThreadZagrSlov(CountDownLatch countDownLatch){
+            this.countDownLatch = countDownLatch;
+            start();
+        }
+        @Override
+        public void run() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.zagryzka_slovarya_v_bazy),
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+            for (int k = 0;k<dbname_checked_arr.length;k++){
+                if (dbname_checked_arr[k]){
+                    args[2]= Integer.toString(name_lesson_id_arr[k]);
+                    jsonStr = URLConnectionExample.main(args);
+                    namelessons = name_lesson_arr[k];
+                    namelessons_otobr = name_lesson_otobr_arr[k];
+                    if (!jsonStr.equals("")) {
+                        SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
+                        Cursor cursor = database.rawQuery("SELECT sql FROM sqlite_master WHERE type = ? AND name = ?", new String[]{"table", namelessons});
+                        if (!cursor.moveToFirst()) {
+                            Log.d("ivan", "Создаем новую таблицу если такой нет" );
+                            database.execSQL("create table if not exists " + namelessons + " (_id integer primary key autoincrement,"
+                                    + "english text,"
+                                    + "russian text,"
+                                    + "transcription text,"
+                                    + "kolotv integer,"
+                                    + "vid integer );");
+                            try {
+                                JSONArray contacts = new JSONArray(jsonStr);
+                                ContentValues cv1 = new ContentValues();
+                                cv1.put("name", namelessons);
+                                cv1.put("name_otobrajenie", namelessons_otobr);
+                                database.insert("tablename", null, cv1);
+                                for (int i = 0; i < contacts.length(); i++) {
+                                    JSONObject c = contacts.getJSONObject(i);
+                                    int id = c.getInt("id");
+                                    String english = c.getString("english");
+                                    String russian = c.getString("russian");
+                                    String transcription = c.getString("transcription");
+                                    ContentValues cv = new ContentValues();
+                                    cv.put("_id", id);
+                                    cv.put("english", english);
+                                    cv.put("russian", russian);
+                                    cv.put("transcription", transcription);
+                                    cv.put("kolotv", 0);
+                                    cv.put("vid", 0);
+                                    database.insert(namelessons, null, cv);
+                                    //assert i>0;
+                                }
+                            } catch (final JSONException e) {
+                                Log.e(TAG, getString(R.string.Json_parsing_error) + e.getMessage());
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(),
+                                                getString(R.string.Json_parsing_error),
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                });
 
-
-
-
-
-
-
-
-
-
+                            }
+                            dbOpenHelper.close();
+                            cursor.close();
+                        } else {
+                            try {
+                                Log.d("ivan", "Если таблица уже есть удаляем ее и создаем снова" );
+                                database.delete(namelessons, null, null);
+                                JSONArray contacts = new JSONArray(jsonStr);
+                                for (int i = 0; i < contacts.length(); i++) {
+                                    JSONObject c = contacts.getJSONObject(i);
+                                    int id = c.getInt("id");
+                                    String english = c.getString("english");
+                                    String russian = c.getString("russian");
+                                    String transcription = c.getString("transcription");
+                                    ContentValues cv = new ContentValues();
+                                    cv.put("_id", id);
+                                    cv.put("english", english);
+                                    cv.put("russian", russian);
+                                    cv.put("transcription", transcription);
+                                    cv.put("kolotv", 0);
+                                    cv.put("vid", 0);
+                                    database.insert(namelessons, null, cv);
+                                }
+                            } catch (final JSONException e) {
+                                Log.d("ivan", getString(R.string.Json_parsing_error) + e.getMessage());
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(),
+                                                getString(R.string.Json_parsing_error),
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                            dbOpenHelper.close();
+                            cursor.close();
+                            smenaactivityfynk(ActivitiSlovarb.class);
+                        }
+                    } else {
+                        Log.d("ivan", getString(R.string.internet));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(),
+                                        getString(R.string.internet),
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }
+            }
+            Log.d("ivan","ThreadZagrSlov zapyskay signal");
+            countDownLatch.countDown();
+        }
+    }
 }

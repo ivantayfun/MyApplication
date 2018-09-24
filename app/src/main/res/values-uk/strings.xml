@@ -37,6 +37,8 @@
     <string name="zagryzka_spiska_slovarey">Завантаження списку словників</string>
     <string name="zagryzka_slovarya_v_bazy">Завантаження словника в базу</string>
     <string name="del_slovar">del</string>
+    <string name="Json_parsing_error">Під час скачування трапилась помилка. Спробуйте скачати ще раз</string>
+
     <string-array name="otvetu">
         <item>3</item>
         <item>4</item>
@@ -119,4 +121,5 @@
         Fare , here, pure, rare , cure, during, mare,   fire, bare, mire, stare ,tire,  sere,    mere, store,  core, more, care.
 </b>
 </string>
+
 </resources>

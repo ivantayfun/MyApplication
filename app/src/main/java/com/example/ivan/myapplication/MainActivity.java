@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -23,6 +24,8 @@ import android.widget.TextView;
 import android.view.ViewGroup.LayoutParams;
 import android.graphics.Color;
 import android.content.DialogInterface.OnClickListener;
+
+import java.util.Locale;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout linLayout;
     protected AlertDialog.Builder dialog;
     protected AlertDialog.Builder dialog1;
+    Locale localeg;
     OnClickListener myClickListener = new OnClickListener() {
         public void onClick(DialogInterface dialog, int which) {
             switch (which) {
@@ -206,15 +210,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         kol_otvetu = Integer.valueOf(loadText("otvetu"));
         pref_language = loadText("pref_language");
         //СМЕНА ЯЗЫКА ПОКА ЗАМОРОЖЕНА НЕ УДАЛЯТЬ
-        /*if (pref_language.equals(getResources().getConfiguration().locale.getLanguage())) {
-
-        } else {
+        if (!pref_language.equals(getResources().getConfiguration().locale.getLanguage())) {
             Configuration conf = getResources().getConfiguration();
             localeg = new Locale(pref_language);
             conf.setLocale(localeg);
             getBaseContext().getResources().updateConfiguration(conf, getResources().getDisplayMetrics());
 
-        }*/
+        }
 
 
     }
