@@ -4,36 +4,36 @@
     <string name="my_text1">TEXT1</string>
     <string name="my_text2">TEXT2</string>
     <string name="my_text3">TEXT2</string>
-    <string name="steretb">стереть</string>
-    <string name="otvetitb">ответить</string>
-    <string name="vbIy4eno">Выучено</string>
-    <string name="vsego_slov">Всего Word</string>
-    <string name="dalshe">дальше</string>
+    <string name="steretb">Cancel</string>
+    <string name="otvetitb">Reply</string>
+    <string name="vbIy4eno">Learned words</string>
+    <string name="vsego_slov">Of all words</string>
+    <string name="dalshe">Next</string>
     <string name="my_button">BUTTON</string>
-    <string name="ychitbcnachala">Учить сначала</string>
-    <string name="ydalitb_slovarb">Удалить словарь</string>
-    <string name="dialog_ydalitb_slovarb">Вы уверены что хотите удалить выбранные словари</string>
-    <string name="dialog_zagryzitb_slovarb">Загрузить выбранные словари</string>
-    <string name="nastroiki">Настройки</string>
-    <string name="slovari">Словари</string>
-    <string name="gramatika">Граматика</string>
-    <string name="proiznoshenie">Произношение</string>
-    <string name="londonberlin">Download словарь</string>
-    <string name="skachatb_vbIbrannbIe">Скачать выбранные</string>
+    <string name="ychitbcnachala">Teach first</string>
+    <string name="ydalitb_slovarb">Delete dictionary</string>
+    <string name="dialog_ydalitb_slovarb">Are you sure that you want to delete the selected dictionaries</string>
+    <string name="dialog_zagryzitb_slovarb">Download selected dictionaries</string>
+    <string name="nastroiki">Settings</string>
+    <string name="slovari">Dictionaries</string>
+    <string name="gramatika">Grammar</string>
+    <string name="proiznoshenie">Pronunciation</string>
+    <string name="londonberlin">download dictionary</string>
+    <string name="skachatb_vbIbrannbIe">Download selected</string>
     <string name="title_activity_activiti_slovarb">ActivitiSlovarb</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="exit">Словарь закончился</string>
-    <string name="exit_ychitb_c_nachala">Вы уверены что хотите учить словарь с начала</string>
-    <string name="save_data">Выберите следуещее действие</string>
-    <string name="ychitb_zanovo">Учить заново</string>
+    <string name="exit">The dictionary is over.</string>
+    <string name="exit_ychitb_c_nachala">Are you sure that you want to learn the dictionary from the beginning</string>
+    <string name="save_data">Select next Action</string>
+    <string name="ychitb_zanovo">Learn again</string>
     <string name="internet">"Couldn\'t get json from server. Check LogCat for possible errors!"</string>
     <string name="ok">OK</string>
-    <string name="cencel">Отмена</string>
-    <string name="vubratb_drygoi_slovarb">Выбрать другой словарь</string>
+    <string name="cencel">Cancel</string>
+    <string name="vubratb_drygoi_slovarb">Choose another dictionary</string>
     <string name="title_activity_activiti_nastroiki">ActivitiNastroiki</string>
-    <string name="otvetu">Ответы</string>
-    <string name="otvetu_opicanie">Количество правильных ответов</string>
+    <string name="otvetu">Answers</string>
+    <string name="otvetu_opicanie">Number of correct answers</string>
     <string name="zagryzka_spiska_slovarey">zagryzka_spiska_slovarey</string>
     <string name="zagryzka_slovarya_v_bazy">zagryzka_slovarya_v_bazy</string>
     <string name="del_slovar">del</string>
@@ -58,10 +58,10 @@
         <item>9</item>
         <item>10</item>
     </string-array>
-    <string name="variantu">Варианты</string>
+    <string name="variantu">Variants </string>
     <string name="language">Language</string>
-    <string name="variantu_opicanie">Количество вариантов ответов</string>
-    <string name="language_opicanie">Выберите язык</string>
+    <string name="variantu_opicanie">Number of answer variants</string>
+    <string name="language_opicanie">Choose language</string>
     <string-array name="variantu">
         <item>3</item>
         <item>4</item>

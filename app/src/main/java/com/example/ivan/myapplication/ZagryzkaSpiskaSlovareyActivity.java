@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,13 +25,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import static android.content.ContentValues.TAG;
 
-public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements OnClickListener {
+public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity {
     int[] colors = new int[2];
     ExternalDbOpenHelper dbOpenHelper;
     boolean[] dbname_checked_arr;
@@ -42,12 +38,9 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
     LinearLayout slovary_activity_lnlname;
     String namelessons;
     String namelessons_otobr;
-    //final int DIALOG_EXIT2 = 2;
     String [] args;
     private String jsonStr;
     protected AlertDialog.Builder dialog;
-    private static Lock lock = new ReentrantLock();
-    private static Condition condition = lock.newCondition();
     CountDownLatch countDownLatch = new CountDownLatch(1);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,10 +87,6 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
             }
         }
     }
-
-    @Override
-    public void onClick(View v) {
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_zagr_spis_slov, menu);
@@ -136,7 +125,6 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
         finish();
     }
     public void zagryzitb_slovarb(){
-        //new ZagrSlovAsyncTask().execute();
         new ThreadZagrSlovComplit(countDownLatch);
         new ThreadZagrSlov(countDownLatch);
     }
@@ -161,7 +149,6 @@ public class ZagryzkaSpiskaSlovareyActivity extends AppCompatActivity implements
         }
         @Override
         public void run() {
-
             try {
                 Log.d("ivan","ThreadZagrSlovComplit do await");
                 countDownLatch.await();

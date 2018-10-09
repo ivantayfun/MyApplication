@@ -23,12 +23,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.ViewGroup.LayoutParams;
 import android.graphics.Color;
-import android.content.DialogInterface.OnClickListener;
 
 import java.util.Locale;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
     TextView my_text;
     TextView my_text1;
     TextView my_text2;
@@ -85,34 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected AlertDialog.Builder dialog;
     protected AlertDialog.Builder dialog1;
     Locale localeg;
-    OnClickListener myClickListener = new OnClickListener() {
-        public void onClick(DialogInterface dialog, int which) {
-            switch (which) {
-                // положительная кнопка
-                case Dialog.BUTTON_POSITIVE:
-                    ychitbcnachalafynk();
-                    break;
-                // негаитвная кнопка
-                case Dialog.BUTTON_NEGATIVE:
-                    slovarifynk();
-                    break;
-            }
-        }
-    };
-    OnClickListener myClickListener2 = new OnClickListener() {
-        public void onClick(DialogInterface dialog, int which) {
-            switch (which) {
-                // положительная кнопка
-                case Dialog.BUTTON_POSITIVE:
-                    Log.d("ivan", "перед запуском учитсначалафунк");
-                    ychitbcnachalafynk();
-                    break;
-                // негаитвная кнопка
-                case Dialog.BUTTON_NEGATIVE:
-                    break;
-            }
-        }
-    };
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -156,10 +128,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mark = new int[20];
         locale_lang_arr = new String[2];
         //Intent intent = getIntent();
+
         dialog = new AlertDialog.Builder(MainActivity.this);
         dialog.setTitle(R.string.exit_ychitb_c_nachala);
         dialog.setIcon(android.R.drawable.ic_dialog_info);
         //dialog.setMessage(R.string.save_data);
+
         dialog.setPositiveButton(R.string.ok, myClickListener2);
         dialog.setNegativeButton(R.string.cencel, myClickListener2);
         dialog1 = new AlertDialog.Builder(MainActivity.this);
@@ -168,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dialog1.setMessage(R.string.save_data);
         dialog1.setPositiveButton(R.string.ychitb_zanovo, myClickListener);
         dialog1.setNegativeButton(R.string.vubratb_drygoi_slovarb, myClickListener);
+
         //если приложение уже загружалось в преференснастройках perv_zap будет равно 0 а не NULL
         perv_zap_marker = loadText(perv_zap);
         //определяе загружалось ли приложение
@@ -182,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
     private void zagryzkavbazy() {
-        //SQLiteDatabase database = dbOpenHelper.openDataBase();
+        dbOpenHelper.openDataBase();
         saveText(perv_zap, "0");
         saveText(TABLE_NAME_PARSER, "animals");
         saveText("otvetu", "6");
@@ -232,84 +207,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
         switch (id) {
             case R.id.ychitbcnachala:
+                //ЗАПУСК ДИАЛОГА
                 dialog.show();
                 break;
             case R.id.nastroiki:
-                nastroikifynk();
+                //ЗАПУСК АКТИВИТИ НАСТРОЙКИ
+                smenaactivityfynk(PrefActivity.class);
                 break;
             case R.id.slovari:
-                slovarifynk();
+                //ЗАПУСК АКТИВИТИ СЛОВАРИ
+                smenaactivityfynk(ActivitiSlovarb.class);
                 break;
             case R.id.gramatika:
-                gramatikafunk();
+                //ЗАПУСК АКТИВИТИ ГРАМАТИКА
+                smenaactivityfynk(GramatikaActivity.class);
                 break;
             case R.id.proiznoshenie:
-                proiznosheniefunk();
+                //ФУНКЦИИ ЗАПУСТКА АКТИВИТИ ПРОИЗНОШЕНИЕ
+                smenaactivityfynk(ProiznoshenieActivity.class);
                 break;
             case R.id.londonberlin:
-                londonberlinfynk2();
+                //ЗАПУСК АКТИВИТИ ЛОНДОНБЕРЛИН
+                smenaactivityfynk(ZagryzkaSpiskaSlovarey.class);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
-    //ФУНКЦИИ ЗАПУСТКА АКТИВИТИ ПРОИЗНОШЕНИЕ
-    private void proiznosheniefunk() {
-        Intent intent = new Intent(this, ProiznoshenieActivity.class);
-        startActivity(intent);
-        //finish();
-    }
-    //ЗАПУСК АКТИВИТИ ГРАМАТИКА
-    private void gramatikafunk() {
-        Intent intent = new Intent(this, GramatikaActivity.class);
+    //МЕТОД СМЕНЫ АКТИВИТИ
+    private void smenaactivityfynk(Class clas) {
+        Intent intent = new Intent(this, clas);
         startActivity(intent);
     }
-
-    //ЗАПУСК АКТИВИТИ НАСТРОЙКИ
-    private void nastroikifynk() {
-        Intent intent = new Intent(this, PrefActivity.class);
-        startActivity(intent);
-    }
-
-    //ЗАПУСК АКТИВИТИ СЛОВАРИ
-    private void slovarifynk() {
-        Intent intent = new Intent(this, ActivitiSlovarb.class);
-        startActivity(intent);
-
-    }
-
-    //ЗАПУСК АКТИВИТИ ЛОНДОНБЕРЛИН
-    private void londonberlinfynk2() {
-        Intent intent = new Intent(this, ZagryzkaSpiskaSlovarey.class);
-        startActivity(intent);
-
-    }
-
-
     //ПЕРЕОПРЕДЕЛЕНИЕ МЕТОДОВ ЖИЗНЕННОГО ЦИКЛА
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "MainActivity: onStart()");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "MainActivity: onPause()");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "MainActivity: onStop()");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "MainActivity: onDestroy()");
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -358,16 +287,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         col_slov.setText("");
         vuy4_slov.setText("");
         SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
-
-
         Cursor cursor2 = database.rawQuery("SELECT sql FROM sqlite_master WHERE type = ? AND name = ?", new String[]{"table", MY_TABLE});
         if (!cursor2.moveToFirst()) {
-            dbOpenHelper.close();
-            slovarifynk();
+            //ЗАПУСК АКТИВИТИ СЛОВАРИ
             cursor2.close();
+            dbOpenHelper.close();
+            smenaactivityfynk(ActivitiSlovarb.class);
+
         } else {
             if (!(id_vbazezapicb.equalsIgnoreCase("") & vgetid.equalsIgnoreCase(""))) {
-
                 ContentValues cv = new ContentValues();
                 cv.put("kolotv", id_vbazezapicb);
                 cv.put("vid", flagydal);
@@ -376,17 +304,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             Cursor cursor = database.query(MY_TABLE, null, null, null, null, null, null);
             int colslov = cursor.getCount();
-            String concat = res.getString(R.string.vsego_slov) + Integer.toString(colslov);
+            String concat = res.getString(R.string.vsego_slov) +" "+ Integer.toString(colslov);
             col_slov.setText(concat);
             cursor.close();
             selectionArgs2 = new String[]{"0"};
             selection = "vid = ?";
-
-
             Cursor c = database.query(MY_TABLE, null, selection, selectionArgs2, null, null, null);
             int vuy4slov = colslov - c.getCount();
-
-            String foconcat = res.getString(R.string.vbIy4eno) + Integer.toString(vuy4slov);
+            String foconcat = res.getString(R.string.vbIy4eno) +" "+ Integer.toString(vuy4slov);
             vuy4_slov.setText(foconcat);
             if (c.getCount() > 0) {
                 chislo_spiska = 0;
@@ -421,7 +346,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (chislo_spiska < kol_variantu) {
                     na_random2 = chislo_spiska;
                     mark[na_random2] = 90 + na_random2;
-
                 } else {
                     na_random2 = kol_variantu;
                     mark[na_random2] = 90 + na_random2;
@@ -454,7 +378,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     TextView tvName2 = item.findViewById(R.id.tvName2);
                     if (chereda) {
                         if (k == my_rand) {
-
                             my_text.setText(russian_arr[mark[my_rand]]);
                             my_text1.setText("");
                         }
@@ -501,7 +424,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         dbOpenHelper.close();
     }
-    @Override
-    public void onClick(View v) {
-    }
+    DialogInterface.OnClickListener myClickListener2 = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which) {
+                // положительная кнопка
+                case Dialog.BUTTON_POSITIVE:
+                    Log.d("ivan", "перед запуском учитсначалафунк");
+                    ychitbcnachalafynk();
+                    break;
+                // негаитвная кнопка
+                case Dialog.BUTTON_NEGATIVE:
+                    break;
+            }
+        }
+    };
+    DialogInterface.OnClickListener myClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which) {
+                // положительная кнопка
+                case Dialog.BUTTON_POSITIVE:
+                    ychitbcnachalafynk();
+                    break;
+                // негаитвная кнопка
+                case Dialog.BUTTON_NEGATIVE:
+                    //ЗАПУСК АКТИВИТИ СЛОВАРИ
+                    smenaactivityfynk(ActivitiSlovarb.class);
+                    break;
+            }
+        }
+    };
+
 }

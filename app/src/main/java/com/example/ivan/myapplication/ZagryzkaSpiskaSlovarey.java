@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -18,16 +16,11 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
-
 
 public class ZagryzkaSpiskaSlovarey extends Activity {
     String jsonStr;
     public String flag;
-    //String namelessons;
     int[] dbname_id_arr;
     String[] name_lesson_arr;
     String[] name_lesson_otobr_arr;
@@ -35,9 +28,7 @@ public class ZagryzkaSpiskaSlovarey extends Activity {
     String[] dbname_name_otobrajenie_arr;
     public static String[] args;
     URLConnectionExample fff;
-    static ZagryzkaSpiskaSlovarey zagryzkaSpiskaSlovarey;
     private static String TAG = MainActivity.class.getSimpleName();
-    List<String> strings = Collections.synchronizedList(new ArrayList<String>());
     private CountDownLatch countDownLatch = new CountDownLatch(1);
     @Override
     public void onCreate(Bundle savedInstanceState) {
